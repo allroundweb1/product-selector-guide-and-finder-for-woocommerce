@@ -1,0 +1,477 @@
+/* Notices */
+.aw-notice-license-error {
+    background-color: #ff0000;
+    border-width: 0;
+    border: none !important;
+    color: #ffffff;
+    width: auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    position: relative;
+    display: block;
+    font-size: 20px;
+    margin: 5px 0 10px 0 !important;
+}
+
+.aw-notice-license-error a {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.aw-notice-license-error a:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+@media screen and (max-width: 600px) {
+    .aw-notice-license-error {
+        font-size: 16px;
+    }
+}
+
+#wpwrap #wpcontent {
+    padding: 20px;
+    background: #f0f0f1;
+}
+
+input[type=color],
+input[type=date],
+input[type=datetime-local],
+input[type=datetime],
+input[type=email],
+input[type=month],
+input[type=number],
+input[type=password],
+input[type=search],
+input[type=tel],
+input[type=text],
+input[type=time],
+input[type=url],
+input[type=week],
+select,
+textarea,
+button,
+.uk-button,
+.uk-section,
+.uk-container,
+.uk-modal-body,
+.uk-open>.uk-modal-dialog {
+    border-radius: 3px !important;
+}
+
+@media(min-width:900px) {
+    body .uk-section {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+}
+
+/* Pages with UIKit */
+body .uk-progress {
+    background-color: #e1e1e1;
+}
+
+body .uk-form-danger,
+body .uk-form-danger:focus {
+    color: #f0506e;
+    border-color: #f0506e;
+}
+
+.uk-button-primary {
+    background: #1A1AFF;
+    background-color: #1A1AFF;
+}
+
+.uk-progress::-webkit-progress-value {
+    background-color: #1A1AFF;
+}
+
+.uk-progress::-moz-progress-value {
+    background-color: #1A1AFF;
+}
+
+.uk-progress::progress-value {
+    background-color: #1A1AFF;
+}
+
+.uk-button-primary:hover {
+    background: #5151ff;
+    background-color: #5151ff;
+}
+
+body .velo-save-edited-product-selector {
+    background: #16bd00;
+    background-color: #16bd00;
+    color: #ffffff;
+}
+
+body .velo-save-edited-product-selector:hover {
+    background: #13a600;
+    background-color: #13a600;
+    color: #ffffff;
+}
+
+/* Notices */
+.aw-notice-license-error {
+    margin: 0 0 20px 0 !important;
+    border: none !important;
+}
+
+/* Sortable Tables */
+body ol,
+body ul,
+body li,
+body dd {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.velo-product-selector-select .velo-nested-wrapper {
+    margin: 5px 0;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid gray;
+    background-color: #ffffff;
+    display: block;
+    position: relative;
+    cursor: grab;
+}
+
+.velo-product-selector-select .velo-nested-wrapper .velo-nested-sortable {
+    background-color: #f0f0f1;
+    border-radius: 5px;
+    padding: 10px;
+    min-height: 25px;
+    margin: 10px 0;
+    display: block;
+    position: relative;
+}
+
+body .create-question-button {
+    width: 100%;
+}
+
+body #editor-item-edit-modal .create-question-button {
+    width: auto;
+}
+
+body #editor-item-edit-modal .select2-container {
+    display: block;
+    width: 100% !important;
+    margin-bottom: 20px;
+}
+
+body #editor-item-edit-modal select {
+    width: 100%;
+}
+
+body .velo-edit-selector-or-class {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+body .velo-text-align-left {
+    text-align: left;
+}
+
+body .velo-switch-to-url-input-final,
+body .velo-switch-back-final {
+    text-align: underline;
+    color: #1A1AFF;
+}
+
+body .velo-display-none {
+    display: none !important;
+}
+
+body .velo-remove-item-product-editor {
+    cursor: pointer !important;
+    color: #f0506e;
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+
+body .velo-edit-item-product-editor {
+    cursor: pointer !important;
+    color: #666;
+    position: absolute;
+    top: 7px;
+    right: 35px;
+}
+
+body .velo-edit-item-product-editor:hover {
+    color: #1A1AFF;
+}
+
+body .velo-add-sub-item-product-editor {
+    cursor: pointer !important;
+    color: #16bd00;
+    position: absolute;
+    top: 7px;
+    right: 85px;
+}
+
+body .velo-add-copy-item-product-editor {
+    cursor: pointer !important;
+    color: #1A1AFF;
+    position: absolute;
+    top: 7px;
+    right: 60px;
+}
+
+/* Tijdelijk? Tot we de edit functie voor laatste items hebben */
+body .velo-nested-wrapper[data-type="final-value"] .velo-add-copy-item-product-editor,
+body .velo-nested-wrapper[data-type="final-redirect"] .velo-add-copy-item-product-editor {
+    top: 7px;
+    right: 35px;
+}
+
+.uk-modal-dialog.uk-modal-body .uk-modal-footer {
+    padding: 15px 0 5px 0;
+}
+
+body .velo-nested-wrapper img.velo-mini-image-backend {
+    max-width: 50px;
+    max-height: 50px;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+    margin-top: -7px;
+}
+
+#velo-preview-image {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#velo-preview-image img {
+    width: 100%;
+    height: 100%;
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+#velo-preview-image .uk-button {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    padding: 0px 15px 2px !important;
+}
+
+#velo-preview-image .uk-button span,
+#velo-preview-image .uk-button svg {
+    color: #ffffff;
+}
+
+.uk-notification.uk-notification-top-center {
+    top: 40px !important;
+    z-index: 987987987 !important;
+    padding-right: 40px !important;
+}
+
+.uk-notification.uk-notification-top-center .uk-notification-message-success {
+    background-color: #16bd00 !important;
+    color: #ffffff !important;
+    font-size: 14px !important;
+}
+
+.uk-notification.uk-notification-top-center .uk-notification-message-success .uk-close {
+    color: #ffffff !important;
+}
+
+body p.uk-padding-small {
+    margin: 0;
+}
+
+body .velo-coose-awnser-or-final-item {
+    padding-bottom: 20px;
+    margin-top: -10px;
+}
+
+body .create-question-awnser-button {
+    display: block;
+}
+
+body .create-velo-autocomplete-value-button,
+body .create-redirect-url-button {
+    margin-top: 20px;
+}
+
+.velo-selector-editor .velo-shortcode-preview-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.velo-selector-editor .velo-shortcode-preview-wrapper .velo-mini-text-shortcode {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    padding-right: 12px;
+}
+
+.velo-selector-editor .velo-shortcode-preview-wrapper .velo-shortcode-preview {
+    font-size: 12px;
+    padding: 6px 8px;
+    border-radius: 5px;
+    background: rgb(231 231 231);
+    font-weight: normal;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    letter-spacing: 0;
+}
+
+.velo-selector-editor .velo-shortcode-preview-wrapper .velo-shortcode-preview .uk-icon svg {
+    height: 17px;
+}
+
+.velo-selector-editor .velo-shortcode-preview-wrapper .velo-shortcode-preview .velo-pure-shortcode {
+    padding-right: 5px;
+    display: inline-block;
+}
+
+.velo-selector-editor .velo-shortcode-preview-wrapper .velo-shortcode-preview .velo-copy-success {
+    color: #16bd00;
+    font-size: 12px;
+    display: inline-block;
+    padding-right: 5px;
+    text-align: center;
+    display: none;
+}
+
+.velo-selector-editor h3 {
+    display: block;
+    width: 100%;
+}
+
+.velo-selector-editor .velo-show-max-items-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.velo-selector-editor .velo-show-max-items-wrapper .velo-show-max-items {
+    display: inline-flex;
+    margin: 0 7px;
+    padding: 6px 10px;
+    background: #1e87f0;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 20px;
+    width: 66px;
+    max-width: 200px;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    cursor: default;
+}
+
+.velo-selector-editor .velo-show-max-items-wrapper .velo-show-max-items.velo-show-orange {
+    background: #f87d00;
+}
+
+.velo-selector-editor .velo-show-max-items-wrapper .velo-show-max-items.velo-show-red {
+    background: #f0506e;
+}
+
+.velo-selector-editor .velo-show-max-items-wrapper .velo-show-max-items span {
+    display: inline-block;
+    color: #ffffff;
+}
+
+.velo-choose-in-pop-up-awnser-question,
+.velo-choose-in-pop-up-final-item {
+    width: 80%;
+}
+
+.main-settings-wrap h3 {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.velo-unlock-premium-button {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: #f87d00;
+    margin-left: 20px;
+    border: 1px solid #ffffff;
+    text-decoration: none !important;
+}
+
+#too-many-items-modal .velo-unlock-premium-button,
+#mutliple-selectors-modal .velo-unlock-premium-button {
+    margin-left: 0;
+    margin-top: 20px;
+}
+
+.velo-unlock-premium-button:hover {
+    color: #f87d00;
+    background-color: #ffffff;
+    border: 1px solid #f87d00;
+}
+
+.velo-unlock-premium-button a,
+.velo-unlock-premium-button span {
+    color: #ffffff;
+    text-decoration: none !important;
+}
+
+.velo-unlock-premium-button:hover a,
+.velo-unlock-premium-button:hover span {
+    color: #f87d00;
+    text-decoration: none !important;
+}
+
+.velo-settings-wrap-flex-inner-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 40px;
+}
+
+/* WordPress menu item */
+.wp-menu-open.toplevel_page_velo-product-selector {
+    background: #1A1AFF !important;
+    background-color: #1A1AFF !important;
+    color: #ffffff !important;
+}
+
+.wp-menu-open.toplevel_page_velo-product-selector[aria-haspopup="true"] .wp-menu-image img {
+    padding: 4px 0 0 0 !important;
+}
