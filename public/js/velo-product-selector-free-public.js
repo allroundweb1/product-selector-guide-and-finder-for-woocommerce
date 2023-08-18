@@ -1,6 +1,16 @@
 (function ($) {
     'use strict';
     $(document).ready(function () {
+        function velo_strip_last_level(level) {
+            const lastUnderscoreIndex = level.lastIndexOf("_");
+            if (lastUnderscoreIndex === -1) return false; // if there are no underscores
+            const newLvl = level.substring(0, lastUnderscoreIndex); // remove last part
+            const secondLastUnderscoreIndex = newLvl.lastIndexOf("_");
+            if (secondLastUnderscoreIndex === -1) return false; // if there is only one underscore
+            const finalLvl = newLvl.substring(0, secondLastUnderscoreIndex); // remove second last part
+            return finalLvl;
+        }
+
         function velo_get_value_from_object(object, keysString) {
             let keys = keysString.split('_');
             let current = object;
@@ -25,6 +35,11 @@
 
             // Check if we got some data back
             if (data) {
+                // Add back button if level is not zero. Also check if there is a back level
+                if (level !== '0' && velo_strip_last_level(level) !== false) {
+                    element.html('<button class="velo-frontend-back-button" data-level="' + velo_strip_last_level(level) + '">' + velo_product_selector.velo_back_text + '</button>');
+                }
+
                 // Check if there is a text
                 if (data["text"]) {
                     element.append('<h2>' + data["text"] + '</h2>');
@@ -55,8 +70,8 @@
             }
         }
 
-        // Set data with AJAX for final value items [TODO]
-        function velo_set_html_data_for_element_final_value(element, item_value) {
+        // Set data with AJAX for final value items
+        function velo_set_html_data_for_element_final_value(element, item_value, level = '0') {
             // Start with a loading screen
             element.html('<div class="velo-loading"><div></div><div></div><div></div></div>');
 
@@ -71,8 +86,13 @@
                 },
                 success: function (response) {
                     if (response.data && response.data.data) {
+                        // Add back button if level is not zero. Also check if there is a back level
+                        if (level !== '0' && velo_strip_last_level(level) !== false) {
+                            element.html('<button class="velo-frontend-back-button" data-level="' + velo_strip_last_level(level) + '">' + velo_product_selector.velo_back_text + '</button>');
+                        }
+
                         // Set HTML for the velo element
-                        element.html(response.data.data);
+                        element.append(response.data.data);
                     } else {
                         element.html('No data found.');
                     }
@@ -93,7 +113,7 @@
         }
 
         // On click of choice item
-        $('body').on('click', '.velo-inner-choice', function () {
+        $('body').on('click', '.velo-inner-choice, button.velo-frontend-back-button', function () {
             const velo_element = $(this);
             const velo_parent = velo_element.closest('.velo-wrapper');
             const velo_level = velo_element.attr('data-level');
@@ -107,7 +127,7 @@
                 // Do notting for redirects
             } else if (velo_element.hasClass('final-value')) {
                 // AJAX call to get the right new data [TODO]
-                velo_set_html_data_for_element_final_value(velo_parent, item_value);
+                velo_set_html_data_for_element_final_value(velo_parent, item_value, velo_level);
             } else {
                 // Set HTML for the velo element
                 velo_set_html_data_for_element(velo_parent, velo_data, velo_level);
