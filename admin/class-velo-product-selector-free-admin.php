@@ -138,17 +138,10 @@ class Velo_Product_Selector_Free_Admin
     // Function to get the product selector selector (dropdown) and buttons to create a new product selector
     function velo_ajax_product_selector_select_and_create()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
-
-        // Check if nonce is valid
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
         // Create OB to get the HTML
         ob_start();
@@ -216,15 +209,14 @@ class Velo_Product_Selector_Free_Admin
     // Function to create a new product selector
     function velo_ajax_create_selector()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['name'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
+        // Check if all required fields are set
+        if (!isset($_REQUEST['name'])) {
+            wp_send_json_error('Not all required fields are set.', 400);
         }
 
         // Create OB to get the HTML
@@ -280,16 +272,10 @@ class Velo_Product_Selector_Free_Admin
     // Function to get the pop-up form to create a new selector
     function velo_ajax_get_form_to_create_selector()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
-
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
         // Create OB to get the HTML
         ob_start();
@@ -323,15 +309,14 @@ class Velo_Product_Selector_Free_Admin
     // Function to the the product selector editor
     function velo_ajax_get_single_product_selector_editor()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['product_selector_id'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
+        // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
+        // Check if all required fields are set
+        if (!isset($_REQUEST['product_selector_id'])) {
+            wp_send_json_error('Not all required fields are set.', 400);
         }
 
         // Get information about the post
@@ -605,15 +590,14 @@ class Velo_Product_Selector_Free_Admin
     // Search autocomplete callback
     function velo_ajax_search_posts_callback()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['query'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
+        // Check if all required fields are set
+        if (!isset($_REQUEST['query'])) {
+            wp_send_json_error('Not all required fields are set.', 400);
         }
 
         // Get search query
@@ -687,15 +671,14 @@ class Velo_Product_Selector_Free_Admin
     // Function to save the edited product selector
     function velo_ajax_save_edited_product_selector()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['json_data']) || !isset($_REQUEST['product_selector_id'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
+        // Check if all required fields are set
+        if (!isset($_REQUEST['json_data']) || !isset($_REQUEST['product_selector_id'])) {
+            wp_send_json_error('Not all required fields are set.', 400);
         }
 
         // Get information about the post
@@ -738,15 +721,14 @@ class Velo_Product_Selector_Free_Admin
     // Function to detele the product selector
     function velo_ajax_delete_product_selector()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['product_selector_id'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
+        // Check if all required fields are set
+        if (!isset($_REQUEST['product_selector_id'])) {
+            wp_send_json_error('Not all required fields are set.', 400);
         }
 
         // Get information about the post
@@ -774,15 +756,14 @@ class Velo_Product_Selector_Free_Admin
     // Function to get the image URL by image ID
     function velo_ajax_get_image_for_editor()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['image_id'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
+        // Check if all required fields are set
+        if (!isset($_REQUEST['image_id'])) {
+            wp_send_json_error('Not all required fields are set.', 400);
         }
 
         // Setup some return data
@@ -797,15 +778,14 @@ class Velo_Product_Selector_Free_Admin
     // Functie om alle afbeeldingen op te halen voor de backend
     function velo_ajax_get_all_images_for_backend()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['images'])) {
-            // Not all fields are set
-            wp_send_json_error('Not all required fields are set.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_settings_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
+        // Check if all required fields are set
+        if (!isset($_REQUEST['images'])) {
+            wp_send_json_error('Not all required fields are set.', 400);
         }
 
         if (empty($_REQUEST['images'])) {

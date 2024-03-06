@@ -135,14 +135,14 @@ class Velo_Product_Selector_Free_Public
     // Get frontend data for the product selector
     function velo_ajax_get_product_selector_data()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['selector_id'])) {
-            wp_send_json_error('No nonce or product selector ID found.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_frontend_ajax_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_frontend_ajax_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
+        // Check if all required values are set
+        if (!isset($_REQUEST['selector_id'])) {
+            wp_send_json_error('Not all required values are set.', 400);
         }
 
         // Get the selector ID and check if the post type is 'velo_selectors'
@@ -180,19 +180,14 @@ class Velo_Product_Selector_Free_Public
     // Get frontend data for the final item
     function velo_ajax_get_html_data_for_final_item()
     {
-        // Check if all variables are set
-        if (!isset($_REQUEST['nonce']) || !isset($_REQUEST['item_value'])) {
-            wp_send_json_error('No nonce or product selector ID found.', 400);
-        }
+	    // Check if the nonce is valid, if not, return error
+	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_frontend_ajax_nonce')) {
+		    wp_send_json_error('Invalid nonce.', 400);
+	    }
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'velo_frontend_ajax_nonce')) {
-            // Nonce verification failed
-            wp_send_json_error('Invalid nonce.', 400);
-        }
-
-        // Chck if value is not empty
+        // Check if all required values are set
         if (empty($_REQUEST['item_value'])) {
-            wp_send_json_error('No item value found.', 400);
+            wp_send_json_error('Not all required values are set.', 400);
         }
 
         // All items
