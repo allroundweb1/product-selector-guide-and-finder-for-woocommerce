@@ -1,4 +1,8 @@
 <?php
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Velo_Product_Selector_Free_Admin_Backend_Pages
 {
     private $plugin_name;

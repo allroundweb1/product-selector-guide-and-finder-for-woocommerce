@@ -4,6 +4,9 @@
  * Template Name: velo_selectors
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 get_header();
 
 wp_head();

@@ -10,6 +10,9 @@
  * @subpackage Velo_Product_Selector_Free/public
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * The public-facing functionality of the plugin.
  *

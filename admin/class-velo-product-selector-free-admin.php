@@ -10,6 +10,9 @@
  * @subpackage Velo_Product_Selector_Free/admin
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * The admin-specific functionality of the plugin.
  *
