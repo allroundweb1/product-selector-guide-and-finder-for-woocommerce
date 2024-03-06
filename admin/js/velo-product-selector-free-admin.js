@@ -1,45 +1,36 @@
 (function ($) {
     'use strict';
+
+    function veloUpdateShowMaxItemsItem() {
+        const nestedWrapperCount = $('.velo-selector-editor .velo-nested-wrapper').length;
+        const showMaxItemsItem = $('.velo-show-max-items');
+
+        $('.velo-items-now').text(nestedWrapperCount);
+
+        if (nestedWrapperCount > 14 && nestedWrapperCount < 20) {
+            showMaxItemsItem.removeClass('velo-show-red');
+            showMaxItemsItem.addClass('velo-show-orange');
+        } else if (nestedWrapperCount > 19) {
+            showMaxItemsItem.removeClass('velo-show-orange');
+            showMaxItemsItem.addClass('velo-show-red');
+        } else {
+            showMaxItemsItem.removeClass('velo-show-orange');
+            showMaxItemsItem.removeClass('velo-show-red');
+        }
+    }
+
     $(document).ready(function () {
-        // Select the element with the class 'velo-selector-editor'
-        const $targetElement = $('.velo-selector-editor');
 
-        // timeoutId for the setTimeout() function
         let timeoutId;
-
-        // Create an observer instance
-        const observer = new MutationObserver(function (mutationsList) {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(function () {
-                veloSelectorChangesDetected();
-            }, 1500);
-        });
-
-        // Configuration options for the MutationObserver
-        const config = { childList: true, subtree: true };
-
-        // Start observing the target element
-        observer.observe($targetElement[0], config);
-
-        // Function to be executed when changes occur in the target element
-        function veloSelectorChangesDetected() {
+        const observer = new MutationObserver(function () {
             console.log('Changes detected in the dynamically generated elements within the target element');
 
-            // Count the number of items with the class '.velo-nested-wrapper'
-            const count_nested_wrappers = $('.velo-selector-editor .velo-nested-wrapper').length;
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(veloUpdateShowMaxItemsItem, 1500);
+        });
 
-            $('body').find('.velo-items-now').text(count_nested_wrappers);
-            if (count_nested_wrappers > 14 && count_nested_wrappers < 20) {
-                $('body').find('.velo-show-max-items').removeClass('velo-show-red');
-                $('body').find('.velo-show-max-items').addClass('velo-show-orange');
-            } else if (count_nested_wrappers > 19) {
-                $('body').find('.velo-show-max-items').removeClass('velo-show-orange');
-                $('body').find('.velo-show-max-items').addClass('velo-show-red');
-            } else {
-                $('body').find('.velo-show-max-items').removeClass('velo-show-orange');
-                $('body').find('.velo-show-max-items').removeClass('velo-show-red');
-            }
-        }
+        const config = { childList: true, subtree: true };
+        observer.observe($('.velo-selector-editor')[0], config);
     });
 
     $(document).ready(function () {
@@ -259,6 +250,11 @@
                                             }
                                         );
                                     });
+
+                                    // Update the show max items item
+                                    console.log('Element ready to update show max items item.');
+                                    veloUpdateShowMaxItemsItem();
+
                                 })
                                 .catch((error) => {
                                     console.log('Something went wrong with the smooth transition.');
