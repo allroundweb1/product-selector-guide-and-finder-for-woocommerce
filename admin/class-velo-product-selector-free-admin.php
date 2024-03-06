@@ -89,7 +89,7 @@ class Velo_Product_Selector_Free_Admin
             // Enqueue WordPress media scripts
             wp_enqueue_media();
 
-            // Use the jQuery UI autocompletes, that comes with wordpress default
+            // Use the jQuery UI autocompletes, that comes with WordPress default
             wp_enqueue_script('jquery-ui-autocomplete');
 
             // Select2 library for autocomplete multi-select
@@ -135,7 +135,7 @@ class Velo_Product_Selector_Free_Admin
         register_post_type('velo_selectors', $args);
     }
 
-    // Function to get the product selector selector (dropdown) and buttons to create a new product selector
+    // Function to get the product selector select (dropdown) and buttons to create a new product selector
     function velo_ajax_product_selector_select_and_create()
     {
 	    // Check if the nonce is valid, if not, return error
@@ -306,7 +306,7 @@ class Velo_Product_Selector_Free_Admin
         die();
     }
 
-    // Function to the the product selector editor
+    // Function to the product selector editor
     function velo_ajax_get_single_product_selector_editor()
     {
         // Check if the nonce is valid, if not, return error
@@ -424,11 +424,11 @@ class Velo_Product_Selector_Free_Admin
                     <div id="editor-item-edit-modal" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
                             <h2 class="uk-modal-title uk-text-center">Item</h2>
-                            <div class="velo-coose-awnser-or-final-item">
+                            <div class="velo-choose-answer-or-final-item">
                                 <p class="uk-text-center uk-padding-small">What type of item do you want to create?</p>
                                 <div class="uk-text-center" uk-grid>
                                     <div class="uk-width-expand@m">
-                                        <button type="button" class="uk-button uk-button-primary velo-choose-in-pop-up-awnser-question">Awnser / Question</button>
+                                        <button type="button" class="uk-button uk-button-primary velo-choose-in-pop-up-answer-question">Answer / Question</button>
                                     </div>
                                 </div>
                                 <div class="uk-text-center uk-padding-small">
@@ -442,27 +442,27 @@ class Velo_Product_Selector_Free_Admin
                             </div>
 
                             <div class="velo-all-edit-and-add-fields">
-                                <!-- Awnser question -->
-                                <div class="velo-create-awnser-question">
-                                    <label for="velo-edit-awnser-field">Awnser:</label>
-                                    <input class="uk-input uk-margin-bottom" type="text" placeholder="Awnser..." aria-label="" value="" id="velo-edit-awnser-field">
+                                <!-- Answer question -->
+                                <div class="velo-create-answer-question">
+                                    <label for="velo-edit-answer-field">Answer:</label>
+                                    <input class="uk-input uk-margin-bottom" type="text" placeholder="Answer..." aria-label="" value="" id="velo-edit-answer-field">
                                     <label for="velo-edit-text-field">Question:</label>
                                     <input class="uk-input uk-margin-bottom" type="text" placeholder="Question...?" aria-label="" value="" id="velo-edit-text-field">
                                 </div>
 
                                 <!-- Final item (product, product cat, post or page) -->
                                 <div class="velo-add-final-step-posts">
-                                    <label for="vvelo-autocomplete-awnser-field">Awnser</label>
-                                    <input class="uk-input uk-margin-bottom" type="text" placeholder="Awnser..." aria-label="" id="velo-autocomplete-awnser-field">
+                                    <label for="vvelo-autocomplete-answer-field">Answer</label>
+                                    <input class="uk-input uk-margin-bottom" type="text" placeholder="Answer..." aria-label="" id="velo-autocomplete-answer-field">
 
                                     <label for="velo-autocomplete-search-field">Add final step item: product, product category, post, page (or redirect URL, <span class="velo-switch-to-url-input-final">click here</span>)</label>
                                     <select class="uk-input uk-margin-bottom" id="velo-autocomplete-search-field"></select>
                                 </div>
 
-                                <!-- Final item (Redirect awnser) -->
+                                <!-- Final item (Redirect answer) -->
                                 <div class="velo-add-final-step-redirect-url">
-                                    <label for="velo-redirect-awnser-field">Awnser</label>
-                                    <input class="uk-input uk-margin-bottom" type="text" placeholder="Awnser..." aria-label="" id="velo-redirect-awnser-field">
+                                    <label for="velo-redirect-answer-field">Answer</label>
+                                    <input class="uk-input uk-margin-bottom" type="text" placeholder="Answer..." aria-label="" id="velo-redirect-answer-field">
 
                                     <label for="velo-redirect-url-field">Add final step item: redirect URL (or <span class="velo-switch-back-final">switch back</span>)</label>
                                     <input class="uk-input uk-margin-bottom" type="text" placeholder="https://redirect-url..." aria-label="" id="velo-redirect-url-field">
@@ -477,12 +477,12 @@ class Velo_Product_Selector_Free_Admin
                                 <!-- All three add buttons -->
                                 <div class="velo-all-add-new-buttons">
                                     <!-- Button Create Question (ADD NEW ITEM) -->
-                                    <button type="button" class="uk-button uk-button-primary create-question-awnser-button uk-margin-top uk-margin-bottom">Create Awnser/Question</button>
+                                    <button type="button" class="uk-button uk-button-primary create-question-answer-button uk-margin-top uk-margin-bottom">Create Answer/Question</button>
 
                                     <!-- Button Create Final Item (product, product cat, post or page) (ADD NEW ITEM) -->
                                     <button type="button" class="uk-button uk-button-primary create-velo-autocomplete-value-button">Add</button>
 
-                                    <!-- Button Create Final Item (Redirect awnser) (ADD NEW ITEM) -->
+                                    <!-- Button Create Final Item (Redirect answer) (ADD NEW ITEM) -->
                                     <button type="button" class="uk-button uk-button-primary create-redirect-url-button">Add</button>
                                 </div>
                             </div>
@@ -544,28 +544,28 @@ class Velo_Product_Selector_Free_Admin
                     // Type & image fallback
                     $data_row['type'] = isset($data_row['type']) ? $data_row['type'] : 'nested';
                     $data_row['image'] = isset($data_row['image']) ? $data_row['image'] : '';
-                    $data_row['awnser'] = isset($data_row['awnser']) ? $data_row['awnser'] : '';
+                    $data_row['answer'] = isset($data_row['answer']) ? $data_row['answer'] : '';
 
                     if ($data_row['type'] === 'nested-question') {
                         // Main question (begin question)
 	                    printf(
-		                    '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"><strong>Awnser:</strong> %s</span> | <span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+		                    '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
 		                    esc_html($data_row['text']),
-		                    esc_html($data_row['awnser']),
+		                    esc_html($data_row['answer']),
 		                    esc_url($data_row['image']),
 		                    esc_attr($data_row['type']),
-		                    esc_html($data_row['awnser']),
+		                    esc_html($data_row['answer']),
 		                    esc_html($data_row['text'])
 	                    );
                     } else {
                         // Nested question
                         printf(
-                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"><strong>Awnser:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
-                            esc_html($data_row['awnser']),
+                            esc_html($data_row['answer']),
                             esc_url($data_row['image']),
                             esc_attr($data_row['type']),
-                            esc_html($data_row['awnser']),
+                            esc_html($data_row['answer']),
                             esc_html($data_row['text'])
                         );
                     }
@@ -578,14 +578,14 @@ class Velo_Product_Selector_Free_Admin
                     // Type fallback
                     $data_row['type'] = isset($data_row['type']) ? $data_row['type'] : 'final-value';
                     $data_row['image'] = isset($data_row['image']) ? $data_row['image'] : '';
-                    $data_row['awnser'] = isset($data_row['awnser']) ? $data_row['awnser'] : '';
+                    $data_row['answer'] = isset($data_row['answer']) ? $data_row['answer'] : '';
 
                     if ($data_row['type'] === 'nested') {
                         // Nested question
                         printf(
-                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
-                            esc_html($data_row['awnser']),
+                            esc_html($data_row['answer']),
                             esc_url($data_row['image']),
                             esc_attr($data_row['type']),
                             esc_html($data_row['text'])
@@ -596,9 +596,9 @@ class Velo_Product_Selector_Free_Admin
                     } elseif ($data_row['type'] === 'nested-question') {
                         // Main question (begin question)
                         printf(
-                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
-                            esc_html($data_row['awnser']),
+                            esc_html($data_row['answer']),
                             esc_url($data_row['image']),
                             esc_attr($data_row['type']),
                             esc_html($data_row['text'])
@@ -609,23 +609,23 @@ class Velo_Product_Selector_Free_Admin
                     } elseif ($data_row['type'] === 'final-redirect') {
                         // Final redirect
                         printf(
-                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"><strong>Awnser:</strong> %s</span> | <span class="item-title"><strong>Redirect:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Redirect:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
-                            esc_html($data_row['awnser']),
+                            esc_html($data_row['answer']),
                             esc_url($data_row['image']),
                             esc_attr($data_row['type']),
-                            esc_html($data_row['awnser']),
+                            esc_html($data_row['answer']),
                             esc_html($data_row['text'])
                         );
                     } else {
                         // Final value
                         printf(
-                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"><strong>Awnser:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
-                            esc_html($data_row['awnser']),
+                            esc_html($data_row['answer']),
                             esc_url($data_row['image']),
                             esc_attr($data_row['type']),
-                            esc_html($data_row['awnser']),
+                            esc_html($data_row['answer']),
                             esc_html($data_row['text'])
                         );
                     }

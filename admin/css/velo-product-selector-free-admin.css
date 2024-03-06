@@ -301,12 +301,12 @@ body p.uk-padding-small {
     margin: 0;
 }
 
-body .velo-coose-awnser-or-final-item {
+body .velo-choose-answer-or-final-item {
     padding-bottom: 20px;
     margin-top: -10px;
 }
 
-body .create-question-awnser-button {
+body .create-question-answer-button {
     display: block;
 }
 
@@ -409,7 +409,7 @@ body .create-redirect-url-button {
     color: #ffffff;
 }
 
-.velo-choose-in-pop-up-awnser-question,
+.velo-choose-in-pop-up-answer-question,
 .velo-choose-in-pop-up-final-item {
     width: 80%;
 }
@@ -432,7 +432,7 @@ body .create-redirect-url-button {
 }
 
 #too-many-items-modal .velo-unlock-premium-button,
-#mutliple-selectors-modal .velo-unlock-premium-button {
+#multiple-selectors-modal .velo-unlock-premium-button {
     margin-left: 0;
     margin-top: 20px;
 }

@@ -37,7 +37,7 @@ class Velo_Product_Selector_Free_Admin_Backend_Pages
     function velo_product_selector_plugin_backend_page()
     {
 ?>
-        <div id="mutliple-selectors-modal" uk-modal>
+        <div id="multiple-selectors-modal" uk-modal>
             <div class="uk-modal-dialog uk-modal-body">
                 <h2 class="uk-modal-title uk-text-center">Add more selectors</h2>
                 <p>In the free version of the plugin you can add 1 selector. If you want to add more selectors you can upgrade to the premium version.<br><a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Unlock premium <span class="uk-icon-link" uk-icon="unlock"></span></a></p>

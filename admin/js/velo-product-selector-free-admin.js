@@ -90,8 +90,8 @@
 
         // Create product selector button pop-up (premium)
         $('body').on('click', '.create-product-selector-pup-up-premium', function (event) {
-            if ($('body').find('#mutliple-selectors-modal').length > 0) {
-                $('body').find('#mutliple-selectors-modal').each(function () {
+            if ($('body').find('#multiple-selectors-modal').length > 0) {
+                $('body').find('#multiple-selectors-modal').each(function () {
                     UIkit.modal($(this)).show();
                 });
             }
@@ -415,32 +415,32 @@
             });
         });
 
-        // Create question/question-awnser functionality in the product selector editor
-        $('body').on('click', '.create-question-button, .create-question-awnser-button', function (event) {
+        // Create question/question-answer functionality in the product selector editor
+        $('body').on('click', '.create-question-button, .create-question-answer-button', function (event) {
             // Check if this about a new item or existing item
-            let is_question_awnser = false;
-            if ($(this).hasClass('create-question-awnser-button')) {
-                is_question_awnser = true;
+            let is_question_answer = false;
+            if ($(this).hasClass('create-question-answer-button')) {
+                is_question_answer = true;
             }
 
-            if (is_question_awnser === true) {
+            if (is_question_answer === true) {
                 const parent_data_id = $('body').find('#velo_element_data_id').val();
                 const parentElement = $('body').find('.velo-nested-wrapper[data-velo-id="' + parent_data_id + '"]');
 
                 const question_val = $('body').find('#velo-edit-text-field').val();
-                const awnser_val = $('body').find('#velo-edit-awnser-field').val();
-                if (question_val === '' || awnser_val === '') {
+                const answer_val = $('body').find('#velo-edit-answer-field').val();
+                if (question_val === '' || answer_val === '') {
                     // Add error class
                     $('body').find('#velo-edit-text-field').addClass('uk-form-danger');
-                    $('body').find('#velo-edit-awnser-field').addClass('uk-form-danger');
+                    $('body').find('#velo-edit-answer-field').addClass('uk-form-danger');
                 } else {
                     // Remove error class
                     $('body').find('#velo-edit-text-field').removeClass('uk-form-danger');
-                    $('body').find('#velo-edit-awnser-field').removeClass('uk-form-danger');
+                    $('body').find('#velo-edit-answer-field').removeClass('uk-form-danger');
 
                     // Reset question value field
                     $('body').find('#velo-edit-text-field').val('');
-                    $('body').find('#velo-edit-awnser-field').val('');
+                    $('body').find('#velo-edit-answer-field').val('');
 
                     // Get sortable list
                     let sortableList = $('body').find('#velo-sortable-list');
@@ -454,7 +454,7 @@
                     const image_id = $('body').find('#velo_image_id').val();
 
                     // Create new item
-                    const newItem = $('<div class="velo-nested-wrapper" data-type="nested" data-image="' + image_id + '" data-title="' + question_val + '" data-awnser="' + awnser_val + '"><span class="item-awnser"><strong>Awnser:</strong> ' + awnser_val + '</span> | <span class="item-title"><strong>Question:</strong> ' + question_val + '</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
+                    const newItem = $('<div class="velo-nested-wrapper" data-type="nested" data-image="' + image_id + '" data-title="' + question_val + '" data-answer="' + answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + answer_val + '</span> | <span class="item-title"><strong>Question:</strong> ' + question_val + '</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
                     const nestedSortable = $('<div class="velo-nested-sortable"></div>');
                     nestedSortable.velosortable(
                         {
@@ -516,7 +516,7 @@
                     }
 
                     // Create new item
-                    const newItem = $('<div class="velo-nested-wrapper" data-type="nested-question" data-image="" data-title="' + question_val + '" data-awnser=""><span class="item-title"><strong>Question:</strong> ' + question_val + '</span> <span class="item-awnser"></span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
+                    const newItem = $('<div class="velo-nested-wrapper" data-type="nested-question" data-image="" data-title="' + question_val + '" data-answer=""><span class="item-title"><strong>Question:</strong> ' + question_val + '</span> <span class="item-answer"></span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
                     const nestedSortable = $('<div class="velo-nested-sortable"></div>');
                     nestedSortable.velosortable(
                         {
@@ -554,17 +554,17 @@
             // Get selected item
             const selected_item_val = $('body').find('#velo-autocomplete-search-field').val();
 
-            // Get awnser val
-            const awnser_val = $('body').find('#velo-autocomplete-awnser-field').val();
+            // Get answer val
+            const answer_val = $('body').find('#velo-autocomplete-answer-field').val();
 
             // Check if empty
-            if (selected_item_val === '' || awnser_val === '') {
+            if (selected_item_val === '' || answer_val === '') {
                 // Add error class
                 if (selected_item_val === '') {
                     $('body').find('#velo-autocomplete-search-field').addClass('uk-form-danger');
                 }
-                if (awnser_val === '') {
-                    $('body').find('#velo-autocomplete-awnser-field').addClass('uk-form-danger');
+                if (answer_val === '') {
+                    $('body').find('#velo-autocomplete-answer-field').addClass('uk-form-danger');
                 }
             } else {
                 // Get sortable list
@@ -577,17 +577,17 @@
 
                 // Remove error class
                 $('body').find('#velo-autocomplete-search-field').removeClass('uk-form-danger');
-                $('body').find('#velo-autocomplete-awnser-field').removeClass('uk-form-danger');
+                $('body').find('#velo-autocomplete-answer-field').removeClass('uk-form-danger');
 
                 // Reset question value field
                 $('body').find('#velo-autocomplete-search-field').val('');
-                $('body').find('#velo-autocomplete-awnser-field').val('');
+                $('body').find('#velo-autocomplete-answer-field').val('');
 
                 // Get the image id
                 const image_id = $('body').find('#velo_image_id').val();
 
                 // Create new item
-                const newItem = $('<div class="velo-nested-wrapper" data-type="final-value" data-image="' + image_id + '" data-title="' + selected_item_val + '" data-awnser="' + awnser_val + '"><span class="item-awnser"><strong>Awnser:</strong> ' + awnser_val + '</span> | <span class="item-title"><strong>Value:</strong> ' + selected_item_val + '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
+                const newItem = $('<div class="velo-nested-wrapper" data-type="final-value" data-image="' + image_id + '" data-title="' + selected_item_val + '" data-answer="' + answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + answer_val + '</span> | <span class="item-title"><strong>Value:</strong> ' + selected_item_val + '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
 
                 // Add new item to the existing sortable element
                 parentElement.children('.velo-nested-sortable').first().append(newItem);
@@ -611,23 +611,23 @@
             const parentElement = $('body').find('.velo-nested-wrapper[data-velo-id="' + parent_data_id + '"]');
 
             const redirect_url_val = $('body').find('#velo-redirect-url-field').val();
-            const redirect_awnser_val = $('body').find('#velo-redirect-awnser-field').val();
-            if (redirect_url_val === '' || redirect_awnser_val === '') {
+            const redirect_answer_val = $('body').find('#velo-redirect-answer-field').val();
+            if (redirect_url_val === '' || redirect_answer_val === '') {
                 // Add error class
                 if (redirect_url_val === '') {
                     $('body').find('#velo-redirect-url-field').addClass('uk-form-danger');
                 }
-                if (redirect_awnser_val === '') {
-                    $('body').find('#velo-redirect-awnser-field').addClass('uk-form-danger');
+                if (redirect_answer_val === '') {
+                    $('body').find('#velo-redirect-answer-field').addClass('uk-form-danger');
                 }
             } else {
                 // Remove error class
                 $('body').find('#velo-redirect-url-field').removeClass('uk-form-danger');
-                $('body').find('#velo-redirect-awnser-field').removeClass('uk-form-danger');
+                $('body').find('#velo-redirect-answer-field').removeClass('uk-form-danger');
 
                 // Reset question value field
                 $('body').find('#velo-redirect-url-field').val('');
-                $('body').find('#velo-redirect-awnser-field').val('');
+                $('body').find('#velo-redirect-answer-field').val('');
 
                 // Get sortable list
                 let sortableList = $('body').find('#velo-sortable-list');
@@ -636,7 +636,7 @@
                 const image_id = $('body').find('#velo_image_id').val();
 
                 // Create new item
-                const newItem = $('<div class="velo-nested-wrapper" data-type="final-redirect" data-image="' + image_id + '" data-title="' + redirect_url_val + '" data-awnser="' + redirect_awnser_val + '"><span class="item-awnser"><strong>Awnser:</strong> ' + redirect_awnser_val + '</span> | <span class="item-title"><strong>Redirect:</strong> ' + redirect_url_val + '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
+                const newItem = $('<div class="velo-nested-wrapper" data-type="final-redirect" data-image="' + image_id + '" data-title="' + redirect_url_val + '" data-answer="' + redirect_answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + redirect_answer_val + '</span> | <span class="item-title"><strong>Redirect:</strong> ' + redirect_url_val + '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
 
                 // Add new item to the existing sortable element
                 parentElement.children('.velo-nested-sortable').first().append(newItem);
@@ -753,8 +753,8 @@
                 // Set the title of the item in the text field
                 $('body').find('#velo-edit-text-field').val('');
 
-                // Set the awnser of the item in the text field
-                $('body').find('#velo-edit-awnser-field').val('');
+                // Set the answer of the item in the text field
+                $('body').find('#velo-edit-answer-field').val('');
 
                 // Set the image ID in the hidden input
                 $('body').find('#velo_image_id').val('');
@@ -765,8 +765,8 @@
                 // Set the title of the item in the text field
                 $('body').find('#velo-edit-text-field').val(parentElement.attr('data-title'));
 
-                // Set the awnser of the item in the text field
-                $('body').find('#velo-edit-awnser-field').val(parentElement.attr('data-awnser'));
+                // Set the answer of the item in the text field
+                $('body').find('#velo-edit-answer-field').val(parentElement.attr('data-answer'));
 
                 // Set the image ID in the hidden input
                 $('body').find('#velo_image_id').val(parentElement.attr('data-image'));
@@ -794,11 +794,11 @@
                 $('body').find('#velo_new_or_edit').val('new');
 
                 // Show
-                $('body').find('.velo-coose-awnser-or-final-item').show();
+                $('body').find('.velo-choose-answer-or-final-item').show();
 
                 // Hide
                 $('body').find('#editor-item-edit-modal .uk-modal-footer').hide();
-                $('body').find('.velo-create-awnser-question').hide();
+                $('body').find('.velo-create-answer-question').hide();
                 $('body').find('.velo-add-final-step-posts').hide();
                 $('body').find('.velo-add-final-step-redirect-url').hide();
                 $('body').find('.velo-media-preview-and-upload').hide();
@@ -814,21 +814,21 @@
                 $('body').find('#velo_element_type').val('nested-question');
 
                 // Show
-                $('body').find('.velo-create-awnser-question').show();
+                $('body').find('.velo-create-answer-question').show();
                 $('body').find('#editor-item-edit-modal .uk-modal-footer').show();
                 $('body').find('.velo-all-edit-and-add-fields').show();
 
                 // Hide
-                $('body').find('label[for="velo-edit-awnser-field"]').hide();
-                $('body').find('#velo-edit-awnser-field').hide();
+                $('body').find('label[for="velo-edit-answer-field"]').hide();
+                $('body').find('#velo-edit-answer-field').hide();
                 $('body').find('.velo-media-preview-and-upload').hide();
-                $('body').find('.velo-coose-awnser-or-final-item').hide();
+                $('body').find('.velo-choose-answer-or-final-item').hide();
                 $('body').find('.velo-all-add-new-buttons').hide();
                 $('body').find('.velo-add-final-step-posts').hide();
                 $('body').find('.velo-add-final-step-redirect-url').hide();
             } else {
                 // Change modal title
-                $('body').find('#editor-item-edit-modal .uk-modal-title').text('Edit Awnser/Question');
+                $('body').find('#editor-item-edit-modal .uk-modal-title').text('Edit Answer/Question');
 
                 // Set new or edit type
                 $('body').find('#velo_new_or_edit').val('edit');
@@ -837,50 +837,50 @@
                 $('body').find('#velo_element_type').val('nested');
 
                 // Show
-                $('body').find('.velo-create-awnser-question').show();
+                $('body').find('.velo-create-answer-question').show();
                 $('body').find('.velo-all-edit-and-add-fields').show();
                 $('body').find('#editor-item-edit-modal .uk-modal-footer').show();
-                $('body').find('label[for="velo-edit-awnser-field"]').show();
-                $('body').find('#velo-edit-awnser-field').show();
+                $('body').find('label[for="velo-edit-answer-field"]').show();
+                $('body').find('#velo-edit-answer-field').show();
                 $('body').find('.velo-media-preview-and-upload').show();
 
                 // Hide
-                $('body').find('.velo-coose-awnser-or-final-item').hide();
+                $('body').find('.velo-choose-answer-or-final-item').hide();
                 $('body').find('.velo-all-add-new-buttons').hide();
                 $('body').find('.velo-add-final-step-posts').hide();
                 $('body').find('.velo-add-final-step-redirect-url').hide();
             }
         });
 
-        // Check for the inner click in the pop-up for awnser/question or final item
-        $('body').on('click', '.velo-choose-in-pop-up-awnser-question, .velo-choose-in-pop-up-final-item', function () {
-            // Check of this is an awnser/question or final item
-            let is_awnser_question = false;
-            if ($(this).hasClass('velo-choose-in-pop-up-awnser-question')) {
-                is_awnser_question = true;
+        // Check for the inner click in the pop-up for answer/question or final item
+        $('body').on('click', '.velo-choose-in-pop-up-answer-question, .velo-choose-in-pop-up-final-item', function () {
+            // Check of this is an answer/question or final item
+            let is_answer_question = false;
+            if ($(this).hasClass('velo-choose-in-pop-up-answer-question')) {
+                is_answer_question = true;
             }
 
-            if (is_awnser_question === true) { // This is a "Create Awnser/Question"
+            if (is_answer_question === true) { // This is a "Create Answer/Question"
                 // Change modal title
-                $('body').find('#editor-item-edit-modal .uk-modal-title').text('Create Awnser/Question');
+                $('body').find('#editor-item-edit-modal .uk-modal-title').text('Create Answer/Question');
 
                 // Set element type (nested, nested-question or final)
                 $('body').find('#velo_element_type').val('nested');
 
                 // Show
-                $('body').find('label[for="velo-edit-awnser-field"]').show();
-                $('body').find('#velo-edit-awnser-field').show();
+                $('body').find('label[for="velo-edit-answer-field"]').show();
+                $('body').find('#velo-edit-answer-field').show();
                 $('body').find('.velo-media-preview-and-upload').show();
-                $('body').find('.create-question-awnser-button').show();
-                $('body').find('.velo-create-awnser-question').show();
+                $('body').find('.create-question-answer-button').show();
+                $('body').find('.velo-create-answer-question').show();
                 $('body').find('.velo-all-add-new-buttons').show();
 
                 // Hide
-                $('body').find('.velo-coose-awnser-or-final-item').hide();
+                $('body').find('.velo-choose-answer-or-final-item').hide();
                 $('body').find('#editor-item-edit-modal .uk-modal-footer').hide();
                 $('body').find('.create-velo-autocomplete-value-button').hide();
                 $('body').find('.create-redirect-url-button').hide();
-            } else if (is_awnser_question === false) { // This is a "Create Final Item"
+            } else if (is_answer_question === false) { // This is a "Create Final Item"
                 // Empty "autocomplete (select2)" element
                 $('body').find('#velo-autocomplete-search-field').html('');
 
@@ -897,8 +897,8 @@
                 $('body').find('#velo_element_type').val('final');
 
                 // Show
-                $('body').find('label[for="velo-edit-awnser-field"]').show();
-                $('body').find('#velo-edit-awnser-field').show();
+                $('body').find('label[for="velo-edit-answer-field"]').show();
+                $('body').find('#velo-edit-answer-field').show();
                 $('body').find('.velo-media-preview-and-upload').show();
                 $('body').find('.velo-all-add-new-buttons').show();
                 $('body').find('.create-velo-autocomplete-value-button').show();
@@ -906,10 +906,10 @@
 
 
                 // Hide
-                $('body').find('.velo-create-awnser-question').hide();
-                $('body').find('.velo-coose-awnser-or-final-item').hide();
+                $('body').find('.velo-create-answer-question').hide();
+                $('body').find('.velo-choose-answer-or-final-item').hide();
                 $('body').find('#editor-item-edit-modal .uk-modal-footer').hide();
-                $('body').find('.create-question-awnser-button').hide();
+                $('body').find('.create-question-answer-button').hide();
                 $('body').find('.create-redirect-url-button').hide();
 
             }
@@ -924,13 +924,13 @@
 
             if (velo_element_type === 'nested') {
                 parentElement.attr('data-title', $('body').find('#velo-edit-text-field').val());
-                parentElement.attr('data-awnser', $('body').find('#velo-edit-awnser-field').val());
+                parentElement.attr('data-answer', $('body').find('#velo-edit-answer-field').val());
                 parentElement.attr('data-image', $('body').find('#velo_image_id').val());
                 parentElement.children('.item-title').first().html('<strong>Question:</strong> ' + $('body').find('#velo-edit-text-field').val());
-                parentElement.children('.item-awnser').first().html('<strong>Awnser:</strong> ' + $('body').find('#velo-edit-awnser-field').val());
+                parentElement.children('.item-answer').first().html('<strong>Answer:</strong> ' + $('body').find('#velo-edit-answer-field').val());
             } else {
                 parentElement.attr('data-title', $('body').find('#velo-edit-text-field').val());
-                parentElement.attr('data-awnser', '');
+                parentElement.attr('data-answer', '');
                 parentElement.attr('data-image', $('body').find('#velo_image_id').val());
                 parentElement.children('.item-title').first().html('<strong>Question:</strong> ' + $('body').find('#velo-edit-text-field').val());
             }
@@ -1049,17 +1049,17 @@
 
             nestedItems.each(function () {
                 const text = $(this).attr('data-title').trim();
-                const awnser = $(this).attr('data-awnser').trim();
+                const answer = $(this).attr('data-answer').trim();
                 const type = $(this).attr('data-type').trim();
                 const image = $(this).attr('data-image').trim();
                 const nestedSortables = $(this).children('.velo-nested-sortable');
                 if (nestedSortables.length > 0) {
                     nestedSortables.each(function () {
                         const nestedData = velo_save_nested_sortable_data($(this));
-                        data.push({ text: text, type: type, image: image, awnser: awnser, nestedData: nestedData });
+                        data.push({ text: text, type: type, image: image, answer: answer, nestedData: nestedData });
                     });
                 } else {
-                    data.push({ text: text, type: type, image: image, awnser: awnser });
+                    data.push({ text: text, type: type, image: image, answer: answer });
                 }
             });
 
