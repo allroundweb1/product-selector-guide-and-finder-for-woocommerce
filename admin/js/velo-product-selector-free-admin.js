@@ -854,64 +854,45 @@
 
         // Check for the inner click in the pop-up for answer/question or final item
         $('body').on('click', '.velo-choose-in-pop-up-answer-question, .velo-choose-in-pop-up-final-item', function () {
-            // Check of this is an answer/question or final item
-            let is_answer_question = false;
+
+            // Show
+            $('body').find('label[for="velo-edit-answer-field"]').show();
+            $('body').find('#velo-edit-answer-field').show();
+            $('body').find('.velo-media-preview-and-upload').show();
+            $('body').find('.velo-all-add-new-buttons').show();
+
+            // Hide
+            $('body').find('.velo-choose-answer-or-final-item').hide();
+            $('body').find('#editor-item-edit-modal .uk-modal-footer').hide();
+            $('body').find('.create-redirect-url-button').hide();
+
             if ($(this).hasClass('velo-choose-in-pop-up-answer-question')) {
-                is_answer_question = true;
-            }
-
-            if (is_answer_question === true) { // This is a "Create Answer/Question"
-                // Change modal title
+                // Change title and set element type
                 $('body').find('#editor-item-edit-modal .uk-modal-title').text('Create Answer/Question');
-
-                // Set element type (nested, nested-question or final)
                 $('body').find('#velo_element_type').val('nested');
 
                 // Show
-                $('body').find('label[for="velo-edit-answer-field"]').show();
-                $('body').find('#velo-edit-answer-field').show();
-                $('body').find('.velo-media-preview-and-upload').show();
                 $('body').find('.create-question-answer-button').show();
                 $('body').find('.velo-create-answer-question').show();
-                $('body').find('.velo-all-add-new-buttons').show();
 
                 // Hide
-                $('body').find('.velo-choose-answer-or-final-item').hide();
-                $('body').find('#editor-item-edit-modal .uk-modal-footer').hide();
                 $('body').find('.create-velo-autocomplete-value-button').hide();
-                $('body').find('.create-redirect-url-button').hide();
-            } else if (is_answer_question === false) { // This is a "Create Final Item"
-                // Empty "autocomplete (select2)" element
-                $('body').find('#velo-autocomplete-search-field').html('');
-
-                // Wait 0.5 seconds before creating new instance of autocomplete (select2)
-                setTimeout(function () {
-                    // Setup autocomplete for search field
-                    velo_set_autocomplete_for_search_field($('body').find('#velo-autocomplete-search-field'));
-                }, 500);
-
-                // Change modal title
+            } else {
+                // Change title and set element type
                 $('body').find('#editor-item-edit-modal .uk-modal-title').text('Create Final Item');
-
-                // Set element type (nested, nested-question or final)
                 $('body').find('#velo_element_type').val('final');
 
+                // Empty and init autocomplete
+                $('body').find('#velo-autocomplete-search-field').html('');
+                setTimeout(() => velo_set_autocomplete_for_search_field($('body').find('#velo-autocomplete-search-field')), 500);
+
                 // Show
-                $('body').find('label[for="velo-edit-answer-field"]').show();
-                $('body').find('#velo-edit-answer-field').show();
-                $('body').find('.velo-media-preview-and-upload').show();
-                $('body').find('.velo-all-add-new-buttons').show();
                 $('body').find('.create-velo-autocomplete-value-button').show();
                 $('body').find('.velo-add-final-step-posts').show();
 
-
                 // Hide
                 $('body').find('.velo-create-answer-question').hide();
-                $('body').find('.velo-choose-answer-or-final-item').hide();
-                $('body').find('#editor-item-edit-modal .uk-modal-footer').hide();
                 $('body').find('.create-question-answer-button').hide();
-                $('body').find('.create-redirect-url-button').hide();
-
             }
         });
 
