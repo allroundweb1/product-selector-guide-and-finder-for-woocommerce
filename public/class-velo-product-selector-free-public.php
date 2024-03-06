@@ -248,10 +248,10 @@ class Velo_Product_Selector_Free_Public
             if ($pages_and_posts->have_posts()) {
                 while ($pages_and_posts->have_posts()) {
                     $pages_and_posts->the_post();
-                    echo '<a href="' . get_permalink(get_the_ID()) . '" target="_self" class="velo-inner-choice final-redirect" data-level="">';
-                    echo '<img class="velo-choice-image" src="' . get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') . '" />';
+                    echo '<a href="' . esc_url(get_permalink(get_the_ID())) . '" target="_self" class="velo-inner-choice final-redirect" data-level="">';
+                    echo '<img class="velo-choice-image" src="' . esc_url(get_the_post_thumbnail_url(get_the_ID(), 'thumbnail')) . '" />';
                     echo '<br>';
-                    echo get_the_title();
+                    echo esc_html(get_the_title());
                     echo '</a>';
                 }
             }
@@ -270,11 +270,11 @@ class Velo_Product_Selector_Free_Public
             if ($other_items->have_posts()) {
                 while ($other_items->have_posts()) {
                     $other_items->the_post();
-                    echo '<a href="' . get_permalink(get_the_ID()) . '" target="_self" class="velo-inner-choice final-redirect" data-level="">';
-                    echo '<img class="velo-choice-image" src="' . get_the_post_thumbnail_url(get_the_ID(), 'thumbnail') . '" />';
-                    echo '<br>';
-                    echo get_the_title();
-                    echo '</a>';
+	                echo '<a href="' . esc_url(get_permalink(get_the_ID())) . '" target="_self" class="velo-inner-choice final-redirect" data-level="">';
+	                echo '<img class="velo-choice-image" src="' . esc_url(get_the_post_thumbnail_url(get_the_ID(), 'thumbnail')) . '" />';
+	                echo '<br>';
+	                echo esc_html(get_the_title());
+	                echo '</a>';
                 }
             }
             wp_reset_postdata();

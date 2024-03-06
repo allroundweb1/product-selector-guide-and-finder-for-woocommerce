@@ -358,11 +358,11 @@ class Velo_Product_Selector_Free_Admin
 
                 <div uk-grid>
                     <div class="uk-width-expand@m uk-margin-right">
-                        <h3>Edit product selector "<?php echo $post_title; ?>"</h3>
+                        <h3>Edit product selector "<?php echo esc_html($post_title); ?>"</h3>
                     </div>
                     <div class="uk-width-1-2@m uk-padding-remove-left uk-text-right velo-shortcode-preview-wrapper">
                         <span class="velo-mini-text-shortcode">Shortcode: </span>
-                        <div class="velo-shortcode-preview"><span class="velo-copy-success">Shortcode copied to clipboard</span><span class="velo-pure-shortcode">[velo_show_product_selector id="<?php echo $post_id; ?>"]</span><span uk-icon="copy"></span></div>
+                        <div class="velo-shortcode-preview"><span class="velo-copy-success">Shortcode copied to clipboard</span><span class="velo-pure-shortcode">[velo_show_product_selector id="<?php echo esc_html($post_id); ?>"]</span><span uk-icon="copy"></span></div>
                     </div>
                 </div>
                 <div class="uk-margin-medium-bottom uk-margin-small-top" uk-grid>
@@ -391,12 +391,12 @@ class Velo_Product_Selector_Free_Admin
                     <?php } ?>
 
                     <div class="velo-product-selector-select">
-                        <div id="velo-sortable-list" data-id="<?php echo $post_id; ?>" class="velo-sortable-list uk-margin-medium-bottom">
+                        <div id="velo-sortable-list" data-id="<?php echo esc_html($post_id); ?>" class="velo-sortable-list uk-margin-medium-bottom">
                             <?php echo $sortable_data; ?>
                         </div>
                         <button class="uk-button velo-save-edited-product-selector uk-margin-right <?php echo !$sortable_data_found ? 'velo-display-none' : ''; ?>">Save</button>
                         <button class="uk-button uk-button-danger velo-delete-edited-product-selector uk-margin-right">Delete</button>
-                        <a href="<?php echo get_permalink($post_id); ?>" target="_blank" class="uk-button uk-button-primary">Preview (save selector first)</a>
+                        <a href="<?php echo esc_url(get_permalink($post_id)); ?>" target="_blank" class="uk-button uk-button-primary">Preview (save selector first)</a>
                     </div>
 
                     <div id="confirmation-editor-item-remove-modal" uk-modal>
@@ -540,15 +540,34 @@ class Velo_Product_Selector_Free_Admin
         if (is_array($data_array) && !empty($data_array)) {
             foreach ($data_array as $key => $data_row) {
                 if (!empty($data_row['nestedData'])) {
+
                     // Type & image fallback
                     $data_row['type'] = isset($data_row['type']) ? $data_row['type'] : 'nested';
                     $data_row['image'] = isset($data_row['image']) ? $data_row['image'] : '';
                     $data_row['awnser'] = isset($data_row['awnser']) ? $data_row['awnser'] : '';
 
-                    if ($data_row['type'] === 'nested-question') { // Main question (begin question)
-                        echo '<div class="velo-nested-wrapper" data-title="' . $data_row['text'] . '" data-awnser="' . $data_row['awnser'] . '" data-image="' . $data_row['image'] . '" data-type="' . $data_row['type'] . '"><span class="item-title"><strong>Question:</strong> ' . $data_row['text'] . '</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>';
+                    if ($data_row['type'] === 'nested-question') {
+                        // Main question (begin question)
+	                    printf(
+		                    '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"><strong>Awnser:</strong> %s</span> | <span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+		                    esc_html($data_row['text']),
+		                    esc_html($data_row['awnser']),
+		                    esc_url($data_row['image']),
+		                    esc_attr($data_row['type']),
+		                    esc_html($data_row['awnser']),
+		                    esc_html($data_row['text'])
+	                    );
                     } else {
-                        echo '<div class="velo-nested-wrapper" data-title="' . $data_row['text'] . '" data-awnser="' . $data_row['awnser'] . '" data-image="' . $data_row['image'] . '" data-type="' . $data_row['type'] . '"><span class="item-awnser"><strong>Awnser:</strong> ' . $data_row['awnser'] . '</span> | <span class="item-title"><strong>Question:</strong> ' . $data_row['text'] . '</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>';
+                        // Nested question
+                        printf(
+                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"><strong>Awnser:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            esc_html($data_row['text']),
+                            esc_html($data_row['awnser']),
+                            esc_url($data_row['image']),
+                            esc_attr($data_row['type']),
+                            esc_html($data_row['awnser']),
+                            esc_html($data_row['text'])
+                        );
                     }
 
                     echo '<div class="velo-nested-sortable">';
@@ -562,17 +581,53 @@ class Velo_Product_Selector_Free_Admin
                     $data_row['awnser'] = isset($data_row['awnser']) ? $data_row['awnser'] : '';
 
                     if ($data_row['type'] === 'nested') {
-                        echo '<div class="velo-nested-wrapper" data-title="' . $data_row['text'] . '" data-awnser="' . $data_row['awnser'] . '" data-image="' . $data_row['image'] . '" data-type="' . $data_row['type'] . '"><span class="item-awnser"><strong>Awnser:</strong> ' . $data_row['awnser'] . '</span> | <span class="item-title"><strong>Question:</strong> ' . $data_row['text'] . '</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>';
+                        // Nested question
+                        printf(
+                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            esc_html($data_row['text']),
+                            esc_html($data_row['awnser']),
+                            esc_url($data_row['image']),
+                            esc_attr($data_row['type']),
+                            esc_html($data_row['text'])
+                        );
+
                         echo '<div class="velo-nested-sortable">';
                         echo '</div>';
-                    } elseif ($data_row['type'] === 'nested-question') { // Main question (begin question)
-                        echo '<div class="velo-nested-wrapper" data-title="' . $data_row['text'] . '" data-awnser="' . $data_row['awnser'] . '" data-image="' . $data_row['image'] . '" data-type="' . $data_row['type'] . '"><span class="item-awnser"></span><span class="item-title"><strong>Question:</strong> ' . $data_row['text'] . '</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>';
+                    } elseif ($data_row['type'] === 'nested-question') {
+                        // Main question (begin question)
+                        printf(
+                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            esc_html($data_row['text']),
+                            esc_html($data_row['awnser']),
+                            esc_url($data_row['image']),
+                            esc_attr($data_row['type']),
+                            esc_html($data_row['text'])
+                        );
+
                         echo '<div class="velo-nested-sortable">';
                         echo '</div>';
                     } elseif ($data_row['type'] === 'final-redirect') {
-                        echo '<div class="velo-nested-wrapper" data-title="' . $data_row['text'] . '" data-awnser="' . $data_row['awnser'] . '" data-image="' . $data_row['image'] . '" data-type="' . $data_row['type'] . '"><span class="item-awnser"><strong>Awnser:</strong> ' . $data_row['awnser'] . '</span> | <span class="item-title"><strong>Redirect:</strong> ' . $data_row['text'] . '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>';
+                        // Final redirect
+                        printf(
+                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"><strong>Awnser:</strong> %s</span> | <span class="item-title"><strong>Redirect:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            esc_html($data_row['text']),
+                            esc_html($data_row['awnser']),
+                            esc_url($data_row['image']),
+                            esc_attr($data_row['type']),
+                            esc_html($data_row['awnser']),
+                            esc_html($data_row['text'])
+                        );
                     } else {
-                        echo '<div class="velo-nested-wrapper" data-title="' . $data_row['text'] . '" data-awnser="' . $data_row['awnser'] . '" data-image="' . $data_row['image'] . '" data-type="' . $data_row['type'] . '"><span class="item-awnser"><strong>Awnser:</strong> ' . $data_row['awnser'] . '</span> | <span class="item-title"><strong>Value:</strong> ' . $data_row['text'] . '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>';
+                        // Final value
+                        printf(
+                            '<div class="velo-nested-wrapper" data-title="%s" data-awnser="%s" data-image="%s" data-type="%s"><span class="item-awnser"><strong>Awnser:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            esc_html($data_row['text']),
+                            esc_html($data_row['awnser']),
+                            esc_url($data_row['image']),
+                            esc_attr($data_row['type']),
+                            esc_html($data_row['awnser']),
+                            esc_html($data_row['text'])
+                        );
                     }
                     echo '</div>';
                 }
