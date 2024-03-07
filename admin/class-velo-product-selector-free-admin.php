@@ -322,32 +322,35 @@ class Velo_Product_Selector_Free_Admin
             wp_send_json_error('Not all required fields are set.', 400);
         }
 
-        // Get information about the post
-        $post = get_post((int)$_REQUEST['product_selector_id']);
-        $post_type = get_post_type((int)$_REQUEST['product_selector_id']);
-        $post_id = isset($post->ID) ? $post->ID : strip_tags((int)$_REQUEST['product_selector_id']);
-        $post_title = '';
+        $product_selector_id = filter_input(INPUT_POST, 'product_selector_id', FILTER_SANITIZE_NUMBER_INT);
+        if (empty($product_selector_id)) wp_send_json_error('This item does not exist.', 400);
 
-        if ($post_type !== 'velo_selectors' && !empty($post)) {
-            // Wrong post type
-            wp_send_json_error('This item does not exist.', 400);
-        }
+	    // Get information about the post
+	    $post = get_post($product_selector_id);
+	    $post_type = get_post_type($product_selector_id);
+	    $post_id = $post->ID ?? $product_selector_id;
+	    $post_title = '';
 
-        // Get the post title
-        if (isset($post->post_title)) {
-            $post_title = $post->post_title;
-        }
+	    if ($post_type !== 'velo_selectors' && !empty($post)) {
+		    // Wrong post type
+		    wp_send_json_error('This item does not exist.', 400);
+	    }
 
-        // Check for previous sortable list content, otherwise show a placeholder
-        $sortable_data_found = false;
-        $sortable_data = '<div class="placeholder-sortable-list">This product selector is empty. Create your first question to start 🎉</div>';
-        $sortable_json_data_meta = get_post_meta($post_id, 'velo_product_selector_data', true);
-        if (!empty($sortable_json_data_meta)) {
-            // Do logic if there is a sortable list
-            $sortable_data_found = true;
-            $sortable_data = $this->velo_get_sortablejs_html($sortable_json_data_meta);
-            // $sortable_data = print_r($sortable_json_data_meta, true);
-        }
+	    // Get the post title
+	    if (isset($post->post_title)) {
+		    $post_title = $post->post_title;
+	    }
+
+	    // Check for previous sortable list content, otherwise show a placeholder
+	    $sortable_data_found = false;
+	    $sortable_data = '<div class="placeholder-sortable-list">This product selector is empty. Create your first question to start 🎉</div>';
+	    $sortable_json_data_meta = get_post_meta($post_id, 'velo_product_selector_data', true);
+	    if (!empty($sortable_json_data_meta)) {
+		    // Do logic if there is a sortable list
+		    $sortable_data_found = true;
+		    $sortable_data = $this->velo_get_sortablejs_html($sortable_json_data_meta);
+		    // $sortable_data = print_r($sortable_json_data_meta, true);
+	    }
 
         // Create OB to get the HTML
         ob_start();
@@ -658,19 +661,14 @@ class Velo_Product_Selector_Free_Admin
             wp_send_json_error('Not all required fields are set.', 400);
         }
 
-        // Get search query
-        $search_query = $_REQUEST['query'];
-
-        // WP Query to get all products, product_cat(taxonomy), posts and pages
+	    $search_query = htmlspecialchars($_POST['query'], ENT_QUOTES, 'UTF-8');
         $results = array();
 
-        // Query for posts and pages
-        $args = array(
-            's' => $search_query,
-            'post_type' => array('post', 'page', 'product'),
-            'posts_per_page' => -1,
-        );
-        $query = new WP_Query($args);
+        $query = new WP_Query(array(
+	        's' => $search_query,
+	        'post_type' => array('post', 'page', 'product'),
+	        'posts_per_page' => -1,
+        ));
 
         while ($query->have_posts()) {
             $query->the_post();
@@ -684,16 +682,12 @@ class Velo_Product_Selector_Free_Admin
             $results[] = $result;
         }
 
-        // Reset the query
         wp_reset_postdata();
-
-        // Query for product_cat taxonomy
-        $tax_args = array(
-            'taxonomy' => 'product_cat',
-            'field' => 'name',
-            'name__like' => $search_query,
-        );
-        $tax_query = new WP_Term_Query($tax_args);
+        $tax_query = new WP_Term_Query(array(
+	        'taxonomy' => 'product_cat',
+	        'field' => 'name',
+	        'name__like' => $search_query,
+        ));
 
         foreach ($tax_query->get_terms() as $term) {
             $result = array(
@@ -705,10 +699,7 @@ class Velo_Product_Selector_Free_Admin
             $results[] = $result;
         }
 
-        // Return the data
         wp_send_json_success($results, 200);
-
-        die();
     }
 
     // Count nested items
@@ -739,10 +730,13 @@ class Velo_Product_Selector_Free_Admin
             wp_send_json_error('Not all required fields are set.', 400);
         }
 
-        // Get information about the post
-        $post = get_post((int)$_REQUEST['product_selector_id']);
-        $post_type = get_post_type((int)$_REQUEST['product_selector_id']);
-        $post_id = isset($post->ID) ? $post->ID : strip_tags((int)$_REQUEST['product_selector_id']);
+	    $product_selector_id = filter_input(INPUT_POST, 'product_selector_id', FILTER_SANITIZE_NUMBER_INT);
+	    if (empty($product_selector_id)) wp_send_json_error('This item does not exist.', 400);
+
+	    // Get information about the post
+	    $post = get_post($product_selector_id);
+	    $post_type = get_post_type($product_selector_id);
+	    $post_id = $post->ID ?? $product_selector_id;
 
         if ($post_type !== 'velo_selectors' && !empty($post)) {
             // Wrong post type
@@ -750,13 +744,14 @@ class Velo_Product_Selector_Free_Admin
         }
 
         // Decode the JSON data
-        $string_data = $_REQUEST['json_data'];
-        if (is_array($string_data) || is_object($string_data)) {
-            $string_data = json_encode($string_data);
-        }
+	    $string_data = $_REQUEST['json_data'];
+        if (!is_array($string_data)) wp_send_json_error('Invalid data.', 400);
 
-        // Count the items
-        $item_count = substr_count($string_data, '"text":');
+        $encoded_data = json_encode($string_data);
+        $decoded_data = json_decode($encoded_data, true);
+
+	    // Count the items
+	    $item_count = substr_count($encoded_data, '"text":');
 
         // Check if the string contains more then 20 chars
         if ($item_count > 20) {
@@ -765,18 +760,17 @@ class Velo_Product_Selector_Free_Admin
         }
 
         // Update selector data
-        update_post_meta($post_id, 'velo_product_selector_data', $_REQUEST['json_data']);
+        update_post_meta($post_id, 'velo_product_selector_data', $decoded_data);
 
         // Setup some return data
         $return_obj = array();
-        $return_obj['json_saved'] = $_REQUEST['json_data'];
+        $return_obj['json_saved'] = $decoded_data;
 
         // Return the data
         wp_send_json_success($return_obj, 200);
-        die();
     }
 
-    // Function to detele the product selector
+    // Function to delete the product selector
     function velo_ajax_delete_product_selector()
     {
 	    // Check if the nonce is valid, if not, return error
@@ -789,15 +783,18 @@ class Velo_Product_Selector_Free_Admin
             wp_send_json_error('Not all required fields are set.', 400);
         }
 
-        // Get information about the post
-        $post = get_post((int)$_REQUEST['product_selector_id']);
-        $post_type = get_post_type((int)$_REQUEST['product_selector_id']);
-        $post_id = isset($post->ID) ? $post->ID : strip_tags((int)$_REQUEST['product_selector_id']);
+	    $product_selector_id = filter_input(INPUT_POST, 'product_selector_id', FILTER_SANITIZE_NUMBER_INT);
+	    if (empty($product_selector_id)) wp_send_json_error('This item does not exist.', 400);
 
-        if ($post_type !== 'velo_selectors' && !empty($post)) {
-            // Wrong post type
-            wp_send_json_error('This item does not exist.', 400);
-        }
+	    // Get information about the post
+	    $post = get_post($product_selector_id);
+	    $post_type = get_post_type($product_selector_id);
+	    $post_id = $post->ID ?? $product_selector_id;
+
+	    if ($post_type !== 'velo_selectors' && !empty($post)) {
+		    // Wrong post type
+		    wp_send_json_error('This item does not exist.', 400);
+	    }
 
         // Force delete post
         wp_delete_post((int)$post_id, true);
@@ -808,7 +805,6 @@ class Velo_Product_Selector_Free_Admin
 
         // Return the data
         wp_send_json_success($return_obj, 200);
-        die();
     }
 
     // Function to get the image URL by image ID
@@ -830,10 +826,9 @@ class Velo_Product_Selector_Free_Admin
 
         // Return the data
         wp_send_json_success($return_obj, 200);
-        die();
     }
 
-    // Functie om alle afbeeldingen op te halen voor de backend
+    // Function to get all images for the backend
     function velo_ajax_get_all_images_for_backend()
     {
 	    // Check if the nonce is valid, if not, return error
@@ -854,11 +849,11 @@ class Velo_Product_Selector_Free_Admin
         $all_images = array();
         if (is_array($_REQUEST['images'])) {
             foreach ($_REQUEST['images'] as $key => $image_id) {
-                $image = wp_get_attachment_image_url((int)$image_id, 'thumbnail');
+                $image_url = esc_url(wp_get_attachment_image_url((int)$image_id, 'thumbnail'));
 
                 $value = array(
-                    "id" => $image_id,
-                    "url" => $image,
+                    "id" => (int)$image_id,
+                    "url" => $image_url,
                 );
 
                 if (!in_array($value, $all_images, true)) {
@@ -873,6 +868,5 @@ class Velo_Product_Selector_Free_Admin
 
         // Return the data
         wp_send_json_success($return_obj, 200);
-        die();
     }
 }
