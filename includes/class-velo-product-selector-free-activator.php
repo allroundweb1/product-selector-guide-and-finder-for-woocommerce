@@ -10,6 +10,9 @@
  * @subpackage Velo_Product_Selector_Free/includes
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Fired during plugin activation.
  *
