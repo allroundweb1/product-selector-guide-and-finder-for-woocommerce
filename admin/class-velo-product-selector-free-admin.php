@@ -548,9 +548,9 @@ class Velo_Product_Selector_Free_Admin
                 if (!empty($data_row['nestedData'])) {
 
                     // Type & image fallback
-                    $data_row['type'] = isset($data_row['type']) ? $data_row['type'] : 'nested';
-                    $data_row['image'] = isset($data_row['image']) ? $data_row['image'] : '';
-                    $data_row['answer'] = isset($data_row['answer']) ? $data_row['answer'] : '';
+                    $data_row['type'] = $data_row['type'] ?? 'nested';
+                    $data_row['image'] = is_int(intval($data_row['image'])) ? $data_row['image'] : '';
+                    $data_row['answer'] = $data_row['answer'] ?? '';
 
                     if ($data_row['type'] === 'nested-question') {
                         // Main question (begin question)
@@ -558,7 +558,7 @@ class Velo_Product_Selector_Free_Admin
 		                    '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
 		                    esc_html($data_row['text']),
 		                    esc_html($data_row['answer']),
-		                    esc_url($data_row['image']),
+		                    $data_row['image'],
 		                    esc_attr($data_row['type']),
 		                    esc_html($data_row['answer']),
 		                    esc_html($data_row['text'])
@@ -569,7 +569,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-                            esc_url($data_row['image']),
+	                        $data_row['image'],
                             esc_attr($data_row['type']),
                             esc_html($data_row['answer']),
                             esc_html($data_row['text'])
@@ -582,9 +582,9 @@ class Velo_Product_Selector_Free_Admin
                     echo '</div>';
                 } elseif (isset($data_row['text'])) {
                     // Type fallback
-                    $data_row['type'] = isset($data_row['type']) ? $data_row['type'] : 'final-value';
-                    $data_row['image'] = isset($data_row['image']) ? $data_row['image'] : '';
-                    $data_row['answer'] = isset($data_row['answer']) ? $data_row['answer'] : '';
+                    $data_row['type'] = $data_row['type'] ?? 'final-value';
+                    $data_row['image'] = $data_row['image'] ?? '';
+                    $data_row['answer'] = $data_row['answer'] ?? '';
 
                     if ($data_row['type'] === 'nested') {
                         // Nested question
@@ -592,7 +592,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-                            esc_url($data_row['image']),
+	                        $data_row['image'],
                             esc_attr($data_row['type']),
                             esc_html($data_row['text'])
                         );
@@ -605,7 +605,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-                            esc_url($data_row['image']),
+	                        $data_row['image'],
                             esc_attr($data_row['type']),
                             esc_html($data_row['text'])
                         );
@@ -618,7 +618,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Redirect:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-                            esc_url($data_row['image']),
+	                        $data_row['image'],
                             esc_attr($data_row['type']),
                             esc_html($data_row['answer']),
                             esc_html($data_row['text'])
@@ -629,7 +629,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-                            esc_url($data_row['image']),
+	                        $data_row['image'],
                             esc_attr($data_row['type']),
                             esc_html($data_row['answer']),
                             esc_html($data_row['text'])
@@ -849,7 +849,7 @@ class Velo_Product_Selector_Free_Admin
         $all_images = array();
         if (is_array($_REQUEST['images'])) {
             foreach ($_REQUEST['images'] as $key => $image_id) {
-                $image_url = esc_url(wp_get_attachment_image_url((int)$image_id, 'thumbnail'));
+                $image_url = wp_get_attachment_image_url((int)$image_id, 'thumbnail');
 
                 $value = array(
                     "id" => (int)$image_id,
