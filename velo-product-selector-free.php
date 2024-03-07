@@ -59,12 +59,12 @@ define('VELO_PLUGIN_URL', plugin_dir_url(VELO_PLUGIN_FILE));
  * The code that runs during plugin activation.
  * This action is documented in includes/class-velo-product-selector-free-activator.php
  */
-function activate_velo_product_selector_free() {
+function velo_activate_velo_product_selector_free() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-velo-product-selector-free-activator.php';
 	Velo_Product_Selector_Free_Activator::activate();
 }
 
-register_activation_hook( __FILE__, 'activate_velo_product_selector_free' );
+register_activation_hook( __FILE__, 'velo_activate_velo_product_selector_free' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -81,10 +81,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-velo-product-selector-free
  *
  * @since    1.0.0
  */
-function run_velo_product_selector_free() {
+function velo_run_velo_product_selector_free() {
 
 	$plugin = new Velo_Product_Selector_Free();
 	$plugin->run();
 
 }
-run_velo_product_selector_free();
+velo_run_velo_product_selector_free();
