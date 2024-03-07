@@ -137,8 +137,8 @@ class Velo_Product_Selector_Free
         $plugin_backend_pages = new Velo_Product_Selector_Free_Admin_Backend_Pages($this->get_plugin_name(), $this->get_version());
 
         // LOAD STYLE AND SCRIPTS
-        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'velo_enqueue_styles');
+        $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'velo_enqueue_scripts');
 
         // CREATE POST TYPE
         $this->loader->add_action('init', $plugin_admin, 'create_velo_selectors_post_type');
@@ -171,8 +171,8 @@ class Velo_Product_Selector_Free
         $plugin_public = new Velo_Product_Selector_Free_Public($this->get_plugin_name(), $this->get_version());
 
         // LOAD STYLES AND SCRIPTS
-        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'velo_enqueue_styles');
+        $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'velo_enqueue_scripts');
 
         // SHORTCODES
         $this->loader->add_shortcode('velo_show_product_selector', $plugin_public, 'velo_shortcode_show_product_selector');

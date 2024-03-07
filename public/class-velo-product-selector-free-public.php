@@ -63,7 +63,7 @@ class Velo_Product_Selector_Free_Public
      *
      * @since    1.0.0
      */
-    public function enqueue_styles()
+    public function velo_enqueue_styles()
     {
         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/velo-product-selector-free-public.css', array(), $this->version, 'all');
     }
@@ -73,7 +73,7 @@ class Velo_Product_Selector_Free_Public
      *
      * @since    1.0.0
      */
-    public function enqueue_scripts()
+    public function velo_enqueue_scripts()
     {
         wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/velo-product-selector-free-public.js', array('jquery'), $this->version, false);
 
