@@ -107,7 +107,7 @@ class Velo_Product_Selector_Free_Public
         // Check if the selector is of the post type 'velo_selectors'
         if ($selector && $selector->post_type == 'velo_selectors') {
             // Get saved selector data
-            $sortable_json_data_meta = get_post_meta($atts['id'], 'velo_product_selector_data', true);
+            $sortable_json_data_meta = get_post_meta((int)$atts['id'], 'velo_product_selector_data', true);
 
             // Check if we got any data
             if (empty($sortable_json_data_meta)) {
@@ -148,14 +148,15 @@ class Velo_Product_Selector_Free_Public
             wp_send_json_error('Not all required values are set.', 400);
         }
 
-        // Get the selector ID and check if the post type is 'velo_selectors'
-        $velo_selector_id = (int)$_REQUEST['selector_id'];
+	    $velo_selector_id = filter_input(INPUT_POST, 'selector_id', FILTER_SANITIZE_NUMBER_INT);
+	    if (empty($velo_selector_id)) wp_send_json_error('No product selector ID found.', 400);
+
         $velo_selector = get_post($velo_selector_id);
         if (!$velo_selector || $velo_selector->post_type != 'velo_selectors') {
             wp_send_json_error('No product selector ID found.', 400);
         }
 
-        // Get the selector data
+	    // Get the selector data
         $velo_selector_data = get_post_meta($velo_selector_id, 'velo_product_selector_data', true);
 
         // Check if selector value is not empty
@@ -166,7 +167,7 @@ class Velo_Product_Selector_Free_Public
         // Fetch data and create image URL's of the attachment ID's
         array_walk_recursive($velo_selector_data, function (&$item, $key) {
             if ($key == 'image' && !empty($item)) {
-                $item = wp_get_attachment_url($item);
+                $item = esc_url(wp_get_attachment_url($item));
             }
         });
 
@@ -176,8 +177,6 @@ class Velo_Product_Selector_Free_Public
 
         // Return the data
         wp_send_json_success($return_obj, 200);
-
-        die();
     }
 
     // Get frontend data for the final item
@@ -194,7 +193,7 @@ class Velo_Product_Selector_Free_Public
         }
 
         // All items
-        $item_array = explode(',', $_REQUEST['item_value']);
+        $item_array = explode(',', esc_html($_REQUEST['item_value']));
 
         // Create OB to get the HTML
         ob_start();
@@ -204,6 +203,7 @@ class Velo_Product_Selector_Free_Public
         $all_product_categories = array();
         $all_pages_and_posts = array();
         $all_other_items = array();
+
         foreach ($item_array as $item_inarray) {
             $item_exploded = explode('_', $item_inarray);
             if (isset($item_exploded[0]) && isset($item_exploded[1])) {
