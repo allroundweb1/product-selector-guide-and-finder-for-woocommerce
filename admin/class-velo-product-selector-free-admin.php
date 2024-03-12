@@ -169,7 +169,11 @@ class Velo_Product_Selector_Free_Admin
 
         if (!empty($selector_options)) {
             echo '<select class="uk-select">';
-            echo $selector_options;
+            echo wp_kses($selector_options, array(
+                'option' => array(
+                    'value' => array(),
+                ),
+            ));
             echo '</select>';
             echo '<button type="button" class="uk-button uk-button-primary uk-margin-left edit-single-product-selector">Select</button>';
             echo '<span class="uk-margin-left uk-margin-right"> or </span>';
