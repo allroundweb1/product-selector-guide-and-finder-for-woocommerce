@@ -229,8 +229,8 @@ class Velo_Product_Selector_Free_Admin
         $return_obj = array();
         $return_obj['html'] = '';
 
-        $name = strip_tags($_REQUEST['name']); // Fetch name from request
-        $slug = $this->velo_create_url_slug_by_string($_REQUEST['name']);
+        $name = sanitize_text_field(strip_tags($_REQUEST['name'])); // Fetch name from request
+        $slug = sanitize_title($this->velo_create_url_slug_by_string($_REQUEST['name']));
 
         // Check if slug already exists
         if (get_page_by_path($slug, OBJECT, 'velo_selectors')) {
@@ -661,28 +661,30 @@ class Velo_Product_Selector_Free_Admin
             wp_send_json_error('Not all required fields are set.', 400);
         }
 
-	    $search_query = htmlspecialchars($_POST['query'], ENT_QUOTES, 'UTF-8');
-        $results = array();
+	    $search_query = filter_input(INPUT_POST, 'query', FILTER_SANITIZE_STRING);
+	    $results = array();
 
-        $query = new WP_Query(array(
-	        's' => $search_query,
-	        'post_type' => array('post', 'page', 'product'),
-	        'posts_per_page' => -1,
-        ));
+        if(empty($search_query)) wp_send_json_error('No search query.', 400);
 
-        while ($query->have_posts()) {
-            $query->the_post();
+	    $query = new WP_Query(array(
+		    's' => $search_query,
+		    'post_type' => array('post', 'page', 'product'),
+		    'posts_per_page' => -1,
+	    ));
 
-            $result = array(
-                'title' => get_the_title(),
-                'type' => get_post_type(),
-                'id' => get_the_ID(),
-            );
+	    while ($query->have_posts()) {
+		    $query->the_post();
 
-            $results[] = $result;
-        }
+		    $result = array(
+			    'title' => wp_kses_post(get_the_title()),
+			    'type' => esc_html(get_post_type()),
+			    'id' => get_the_ID(),
+		    );
 
-        wp_reset_postdata();
+		    $results[] = $result;
+	    }
+
+	    wp_reset_postdata();
         $tax_query = new WP_Term_Query(array(
 	        'taxonomy' => 'product_cat',
 	        'field' => 'name',
@@ -743,21 +745,28 @@ class Velo_Product_Selector_Free_Admin
             wp_send_json_error('This item does not exist.', 400);
         }
 
-        // Decode the JSON data
-	    $string_data = $_REQUEST['json_data'];
-        if (!is_array($string_data)) wp_send_json_error('Invalid data.', 400);
+        $json_data = filter_input(INPUT_POST, 'json_data', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+        if (!is_array($json_data)) wp_send_json_error('Invalid data. JSON data is not an array.', 400);
 
-        $encoded_data = json_encode($string_data);
+        $encoded_data = json_encode($json_data);
         $decoded_data = json_decode($encoded_data, true);
 
-	    // Count the items
-	    $item_count = substr_count($encoded_data, '"text":');
+        // Check if the JSON encoding/decoding process was successful
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            wp_send_json_error('Invalid JSON data.', 400);
+        }
+
+        // Count the items
+        $item_count = substr_count($encoded_data, '"text":');
 
         // Check if the string contains more then 20 chars
         if ($item_count > 20) {
-            // To many items
-            wp_send_json_error('To many items. The maximum amount of items is 20. If you want to add more items, you can upgrade to the premium version.', 400);
+            // Too many items
+            wp_send_json_error('Too many items. The maximum amount of items is 20. If you want to add more items, you can upgrade to the premium version.', 400);
         }
+
+        // Ensure $post_id is a positive integer
+        $post_id = absint($product_selector_id);
 
         // Update selector data
         update_post_meta($post_id, 'velo_product_selector_data', $decoded_data);
@@ -847,17 +856,20 @@ class Velo_Product_Selector_Free_Admin
         }
 
         $all_images = array();
-        if (is_array($_REQUEST['images'])) {
+        if (isset($_REQUEST['images']) && is_array($_REQUEST['images'])) {
             foreach ($_REQUEST['images'] as $key => $image_id) {
-                $image_url = wp_get_attachment_image_url((int)$image_id, 'thumbnail');
+                $image_id = filter_var($image_id, FILTER_SANITIZE_NUMBER_INT);
+                if (filter_var($image_id, FILTER_VALIDATE_INT) !== false) {
+                    $image_url = esc_url(wp_get_attachment_image_url((int)$image_id, 'thumbnail'));
 
-                $value = array(
-                    "id" => (int)$image_id,
-                    "url" => $image_url,
-                );
+                    $value = array(
+                        "id" => (int)$image_id,
+                        "url" => $image_url,
+                    );
 
-                if (!in_array($value, $all_images, true)) {
-                    $all_images[] = $value;
+                    if (!in_array($value, $all_images, true)) {
+                        $all_images[] = $value;
+                    }
                 }
             }
         }

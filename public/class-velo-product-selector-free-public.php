@@ -187,13 +187,19 @@ class Velo_Product_Selector_Free_Public
 		    wp_send_json_error('Invalid nonce.', 400);
 	    }
 
-        // Check if all required values are set
-        if (empty($_REQUEST['item_value'])) {
+        $item_value = filter_input(INPUT_POST, 'item_value', FILTER_SANITIZE_STRING);
+
+        if (empty($item_value)) {
             wp_send_json_error('Not all required values are set.', 400);
         }
 
+        // Check if $item_value matches the pattern
+        if (!preg_match('/^[0-9]+_(product|product-cat|page|post)(,[0-9]+_(product|product-cat|page|post))*$/', $item_value)) {
+            wp_send_json_error('Invalid item_value format.', 400);
+        }
+
         // All items
-        $item_array = explode(',', esc_html($_REQUEST['item_value']));
+        $item_array = explode(',', esc_html($item_value));
 
         // Create OB to get the HTML
         ob_start();
