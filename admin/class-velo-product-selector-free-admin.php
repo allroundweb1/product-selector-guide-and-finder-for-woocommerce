@@ -399,7 +399,19 @@ class Velo_Product_Selector_Free_Admin
 
                     <div class="velo-product-selector-select">
                         <div id="velo-sortable-list" data-id="<?php echo esc_html($post_id); ?>" class="velo-sortable-list uk-margin-medium-bottom">
-                            <?php echo wp_kses_post($sortable_data); ?>
+                            <?php echo wp_kses($sortable_data, array(
+                                'div' => array(
+                                    'class' => array(),
+                                    'data-title' => array(),
+                                    'data-answer' => array(),
+                                    'data-image' => array(),
+                                    'data-type' => array(),
+                                ),
+                                'span' => array(
+                                    'class' => array(),
+                                    'uk-icon' => array(),
+                                ),
+                            )); ?>
                         </div>
                         <button class="uk-button velo-save-edited-product-selector uk-margin-right <?php echo !$sortable_data_found ? 'velo-display-none' : ''; ?>">Save</button>
                         <button class="uk-button uk-button-danger velo-delete-edited-product-selector uk-margin-right">Delete</button>
