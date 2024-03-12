@@ -103,8 +103,8 @@ class Velo_Product_Selector_Free_Admin
             wp_enqueue_script($this->plugin_name . '-uikit-icons', plugin_dir_url(__FILE__) . 'library/uikit-3.19.1/js/uikit-icons.min.js', array('jquery', $this->plugin_name . '-uikit'), '3.19.1', false);
 
             // Enqueue sortable JS file
-            wp_enqueue_script($this->plugin_name . '-sortable', plugin_dir_url(__FILE__) . 'library/sortable-1.15.0/js/sortable.min.js', array('jquery'), '1.15.0', false);
-            wp_enqueue_script($this->plugin_name . '-jquery-sortable', plugin_dir_url(__FILE__) . 'library/sortable-1.15.0/js/jquery-sortable.js', array('jquery', $this->plugin_name . '-sortable'), '1.15.0', false);
+            wp_enqueue_script($this->plugin_name . '-sortable', plugin_dir_url(__FILE__) . 'library/sortable-1.15.2/js/sortable.min.js', array('jquery'), '1.15.2', false);
+            wp_enqueue_script($this->plugin_name . '-jquery-sortable', plugin_dir_url(__FILE__) . 'library/sortable-1.15.2/js/jquery-sortable.js', array('jquery', $this->plugin_name . '-sortable'), '1.15.2', false);
 
             // VELO admin pages JS
             wp_enqueue_script($this->plugin_name . '-admin-pages', plugin_dir_url(__FILE__) . 'js/velo-product-selector-free-admin.js', array('jquery', 'jquery-ui-autocomplete', $this->plugin_name . '-select2', $this->plugin_name . '-sortable', $this->plugin_name . '-jquery-sortable', $this->plugin_name . '-uikit', $this->plugin_name . '-uikit-icons'), $this->version, false);
