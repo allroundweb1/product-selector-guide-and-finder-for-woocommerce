@@ -163,7 +163,7 @@ class Velo_Product_Selector_Free_Admin
         $selector_options = '';
         if (!empty($query->posts)) {
             foreach ($query->posts as $post) {
-                $selector_options .= '<option value="' . $post->ID . '">' . $post->post_title . '</option>';
+                $selector_options .= '<option value="' . esc_attr($post->ID) . '">' . esc_html($post->post_title) . '</option>';
             }
         }
 
@@ -325,21 +325,18 @@ class Velo_Product_Selector_Free_Admin
         $product_selector_id = filter_input(INPUT_POST, 'product_selector_id', FILTER_SANITIZE_NUMBER_INT);
         if (empty($product_selector_id)) wp_send_json_error('This item does not exist.', 400);
 
-	    // Get information about the post
-	    $post = get_post($product_selector_id);
-	    $post_type = get_post_type($product_selector_id);
-	    $post_id = $post->ID ?? $product_selector_id;
-	    $post_title = '';
+        $post = get_post($product_selector_id);
+        if ($post === null) {
+            wp_send_json_error('This item does not exist.', 400);
+        }
 
-	    if ($post_type !== 'velo_selectors' && !empty($post)) {
-		    // Wrong post type
-		    wp_send_json_error('This item does not exist.', 400);
-	    }
+        $post_type = get_post_type($product_selector_id);
+        $post_id = $post->ID ?? $product_selector_id;
+        $post_title = $post->post_title ?? '';
 
-	    // Get the post title
-	    if (isset($post->post_title)) {
-		    $post_title = $post->post_title;
-	    }
+        if ($post_type !== 'velo_selectors') {
+            wp_send_json_error('This item does not exist.', 400);
+        }
 
 	    // Check for previous sortable list content, otherwise show a placeholder
 	    $sortable_data_found = false;
@@ -558,7 +555,7 @@ class Velo_Product_Selector_Free_Admin
 		                    '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
 		                    esc_html($data_row['text']),
 		                    esc_html($data_row['answer']),
-		                    $data_row['image'],
+		                    esc_attr($data_row['image']),
 		                    esc_attr($data_row['type']),
 		                    esc_html($data_row['answer']),
 		                    esc_html($data_row['text'])
@@ -569,7 +566,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-	                        $data_row['image'],
+	                        esc_attr($data_row['image']),
                             esc_attr($data_row['type']),
                             esc_html($data_row['answer']),
                             esc_html($data_row['text'])
@@ -592,7 +589,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-	                        $data_row['image'],
+	                        esc_attr($data_row['image']),
                             esc_attr($data_row['type']),
                             esc_html($data_row['text'])
                         );
@@ -605,7 +602,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"></span><span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-	                        $data_row['image'],
+	                        esc_attr($data_row['image']),
                             esc_attr($data_row['type']),
                             esc_html($data_row['text'])
                         );
@@ -618,7 +615,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Redirect:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-	                        $data_row['image'],
+	                        esc_attr($data_row['image']),
                             esc_attr($data_row['type']),
                             esc_html($data_row['answer']),
                             esc_html($data_row['text'])
@@ -629,7 +626,7 @@ class Velo_Product_Selector_Free_Admin
                             '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-image="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Value:</strong> %s</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
                             esc_html($data_row['text']),
                             esc_html($data_row['answer']),
-	                        $data_row['image'],
+	                        esc_attr($data_row['image']),
                             esc_attr($data_row['type']),
                             esc_html($data_row['answer']),
                             esc_html($data_row['text'])

@@ -95,41 +95,42 @@ class Velo_Product_Selector_Free_Public
             'id' => '0',
         ), $atts, 'velo_show_product_selector');
 
-        // Setup the return variable
-        $return_html = '';
+        // Validate the 'id' attribute
+        $id = absint($atts['id']);
+        if ($id <= 0) {
+            return 'Invalid ID.';
+        }
+
+        // Check if the selector exists
+        $selector = get_post($id);
+        if (!$selector) {
+            return 'The product selector does not exist. Please check the ID of the product selector.';
+        }
+
+        // Check if the selector is of the post type 'velo_selectors'
+        if ($selector->post_type != 'velo_selectors') {
+            return 'The product selector does not exist. Please check the ID of the product selector.';
+        }
+
+        // Get saved selector data
+        $sortable_json_data_meta = get_post_meta($id, 'velo_product_selector_data', true);
+
+        // Check if we got any data
+        if (empty($sortable_json_data_meta)) {
+            return 'The product selector is empty. Please fill in the product selector first.';
+        }
 
         // Start the output buffer
         ob_start();
 
-        // Check if the selector exists
-        $selector = get_post((int)$atts['id']);
+        // Output the HTML
+        echo '<div class="velo-wrapper" data-id="' . esc_attr($id) . '">';
+        echo '<div class="velo-loading"><div></div><div></div><div></div></div>';
+        echo '</div>';
+        echo '<div class="velo-free-version-credits" style="display:block!important;">🚀 Created with the free Velocity Product Selector by <a href="https://velocityplugins.com/" target="_blank">Velocity Plugins</a></div>';
 
-        // Check if the selector is of the post type 'velo_selectors'
-        if ($selector && $selector->post_type == 'velo_selectors') {
-            // Get saved selector data
-            $sortable_json_data_meta = get_post_meta((int)$atts['id'], 'velo_product_selector_data', true);
-
-            // Check if we got any data
-            if (empty($sortable_json_data_meta)) {
-                return 'The product selector is empty. Please fill in the product selector first.';
-            }
-        } else {
-            // Error if the product selector is not found
-            return 'The product selector does not exist. Please check the ID of the product selector.';
-        }
-?>
-        <div class="velo-wrapper" data-id="<?php echo (int)$atts['id']; ?>">
-            <div class="velo-loading">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-        <div class="velo-free-version-credits" style="display:block!important;">🚀 Created with the free Velocity Product Selector by <a href="https://velocityplugins.com/" target="_blank">Velocity Plugins</a></div>
-<?php
         // Get the contents of the output buffer
-        $return_html .= ob_get_contents();
-        ob_end_clean();
+        $return_html = ob_get_clean();
 
         // Return the html
         return $return_html;
@@ -138,30 +139,39 @@ class Velo_Product_Selector_Free_Public
     // Get frontend data for the product selector
     function velo_ajax_get_product_selector_data()
     {
-	    // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_frontend_ajax_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        // Check if the nonce is valid, if not, return error
+        if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'velo_frontend_ajax_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
         // Check if all required values are set
-        if (!isset($_REQUEST['selector_id'])) {
+        if (!isset($_POST['selector_id'])) {
             wp_send_json_error('Not all required values are set.', 400);
         }
 
-	    $velo_selector_id = filter_input(INPUT_POST, 'selector_id', FILTER_SANITIZE_NUMBER_INT);
-	    if (empty($velo_selector_id)) wp_send_json_error('No product selector ID found.', 400);
-
-        $velo_selector = get_post($velo_selector_id);
-        if (!$velo_selector || $velo_selector->post_type != 'velo_selectors') {
-            wp_send_json_error('No product selector ID found.', 400);
+        // Validate the 'selector_id' value
+        $velo_selector_id = filter_input(INPUT_POST, 'selector_id', FILTER_SANITIZE_NUMBER_INT);
+        if ($velo_selector_id <= 0) {
+            wp_send_json_error('Invalid product selector ID.', 400);
         }
 
-	    // Get the selector data
+        // Check if the selector exists
+        $velo_selector = get_post($velo_selector_id);
+        if (!$velo_selector) {
+            wp_send_json_error('The product selector does not exist. Please check the ID of the product selector.', 400);
+        }
+
+        // Check if the selector is of the post type 'velo_selectors'
+        if ($velo_selector->post_type != 'velo_selectors') {
+            wp_send_json_error('The product selector does not exist. Please check the ID of the product selector.', 400);
+        }
+
+        // Get saved selector data
         $velo_selector_data = get_post_meta($velo_selector_id, 'velo_product_selector_data', true);
 
-        // Check if selector value is not empty
+        // Check if we got any data
         if (empty($velo_selector_data)) {
-            wp_send_json_error('No product selector data found.', 400);
+            wp_send_json_error('The product selector is empty. Please fill in the product selector first.', 400);
         }
 
         // Fetch data and create image URL's of the attachment ID's
@@ -182,19 +192,19 @@ class Velo_Product_Selector_Free_Public
     // Get frontend data for the final item
     function velo_ajax_get_html_data_for_final_item()
     {
-	    // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_frontend_ajax_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        // Check if the nonce is valid, if not, return error
+        if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'velo_frontend_ajax_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
-        $item_value = filter_input(INPUT_POST, 'item_value', FILTER_SANITIZE_STRING);
-
-        if (empty($item_value)) {
+        // Check if all required values are set
+        if (!isset($_POST['item_value'])) {
             wp_send_json_error('Not all required values are set.', 400);
         }
 
-        // Check if $item_value matches the pattern
-        if (!preg_match('/^[0-9]+_([a-zA-Z0-9_]+)(,[0-9]+_([a-zA-Z0-9_]+))*$/', $item_value)) {
+        // Validate the 'item_value' value
+        $item_value = filter_input(INPUT_POST, 'item_value', FILTER_SANITIZE_STRING);
+        if (empty($item_value) || !preg_match('/^[0-9]+_([a-zA-Z0-9_]+)(,[0-9]+_([a-zA-Z0-9_]+))*$/', $item_value)) {
             wp_send_json_error('Invalid item_value format.', 400);
         }
 
@@ -279,11 +289,11 @@ class Velo_Product_Selector_Free_Public
             if ($other_items->have_posts()) {
                 while ($other_items->have_posts()) {
                     $other_items->the_post();
-	                echo '<a href="' . esc_url(get_permalink(get_the_ID())) . '" target="_self" class="velo-inner-choice final-redirect" data-level="">';
-	                echo '<img class="velo-choice-image" src="' . esc_url(get_the_post_thumbnail_url(get_the_ID(), 'thumbnail')) . '" />';
-	                echo '<br>';
-	                echo esc_html(get_the_title());
-	                echo '</a>';
+                 echo '<a href="' . esc_url(get_permalink(get_the_ID())) . '" target="_self" class="velo-inner-choice final-redirect" data-level="">';
+                 echo '<img class="velo-choice-image" src="' . esc_url(get_the_post_thumbnail_url(get_the_ID(), 'thumbnail')) . '" />';
+                 echo '<br>';
+                 echo esc_html(get_the_title());
+                 echo '</a>';
                 }
             }
             wp_reset_postdata();
@@ -293,8 +303,7 @@ class Velo_Product_Selector_Free_Public
         echo '</div>';
 
         // Get the contents of the output buffer
-        $return_html .= ob_get_contents();
-        ob_end_clean();
+        $return_html = ob_get_clean();
 
         // Setup some return data
         $return_obj = array();
@@ -302,8 +311,6 @@ class Velo_Product_Selector_Free_Public
 
         // Return the data
         wp_send_json_success($return_obj, 200);
-
-        die();
     }
 
     // Get the template to show the product selector
