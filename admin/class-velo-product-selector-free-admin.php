@@ -75,7 +75,7 @@ class Velo_Product_Selector_Free_Admin
             wp_enqueue_style($this->plugin_name . '-select2', plugin_dir_url(__FILE__) . 'library/select2-4.0.13/select2.css', array(), '4.0.13', 'all');
 
             // Enqueue uikit CSS file
-            wp_enqueue_style($this->plugin_name . '-uikit', plugin_dir_url(__FILE__) . 'library/uikit-3.16.22/css/uikit.min.css', array(), '3.16.22', 'all');
+            wp_enqueue_style($this->plugin_name . '-uikit', plugin_dir_url(__FILE__) . 'library/uikit-3.19.1/css/uikit.min.css', array(), '3.19.1', 'all');
         }
     }
 
@@ -99,8 +99,8 @@ class Velo_Product_Selector_Free_Admin
             wp_enqueue_script($this->plugin_name . '-select2', plugin_dir_url(__FILE__) . 'library/select2-4.0.13/select2.js', array('jquery'), '4.0.13', false);
 
             // Enqueue uikit JS files
-            wp_enqueue_script($this->plugin_name . '-uikit', plugin_dir_url(__FILE__) . 'library/uikit-3.16.22/js/uikit.min.js', array('jquery'), '3.16.22', false);
-            wp_enqueue_script($this->plugin_name . '-uikit-icons', plugin_dir_url(__FILE__) . 'library/uikit-3.16.22/js/uikit-icons.min.js', array('jquery', $this->plugin_name . '-uikit'), '3.16.22', false);
+            wp_enqueue_script($this->plugin_name . '-uikit', plugin_dir_url(__FILE__) . 'library/uikit-3.19.1/js/uikit.min.js', array('jquery'), '3.19.1', false);
+            wp_enqueue_script($this->plugin_name . '-uikit-icons', plugin_dir_url(__FILE__) . 'library/uikit-3.19.1/js/uikit-icons.min.js', array('jquery', $this->plugin_name . '-uikit'), '3.19.1', false);
 
             // Enqueue sortable JS file
             wp_enqueue_script($this->plugin_name . '-sortable', plugin_dir_url(__FILE__) . 'library/sortable-1.15.0/js/sortable.min.js', array('jquery'), '1.15.0', false);
