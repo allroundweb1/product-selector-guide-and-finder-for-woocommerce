@@ -18,7 +18,7 @@ Expand the capabilities of your WordPress site with Velocity Plugins. With this 
 This plugin relies on the following third-party services for some of its functionality:
 
 1. 'uikit-3.19.1': A lightweight and modular front-end framework for developing fast and powerful web interfaces. It is used in this plugin to provide a clean and responsive user interface. For more information, visit https://getuikit.com/.
-2. 'sortable-1.15.0': A JavaScript library for reorderable drag-and-drop lists. It is used in this plugin to provide sortable functionality. For more information, visit https://sortablejs.github.io/Sortable/.
+2. 'sortable-1.15.2': A JavaScript library for reorderable drag-and-drop lists. It is used in this plugin to provide sortable functionality. For more information, visit https://sortablejs.github.io/Sortable/.
 3. 'select2-4.0.13': A jQuery-based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results. For more information, visit https://select2.org/.
 
 == Installation ==
