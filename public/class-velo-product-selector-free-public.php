@@ -194,7 +194,7 @@ class Velo_Product_Selector_Free_Public
         }
 
         // Check if $item_value matches the pattern
-        if (!preg_match('/^[0-9]+_(product|product-cat|page|post)(,[0-9]+_(product|product-cat|page|post))*$/', $item_value)) {
+        if (!preg_match('/^[0-9]+_([a-zA-Z0-9_]+)(,[0-9]+_([a-zA-Z0-9_]+))*$/', $item_value)) {
             wp_send_json_error('Invalid item_value format.', 400);
         }
 
