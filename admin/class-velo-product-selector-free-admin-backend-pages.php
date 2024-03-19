@@ -44,7 +44,7 @@ class Velo_Product_Selector_Free_Admin_Backend_Pages
         <div id="multiple-selectors-modal" uk-modal>
             <div class="uk-modal-dialog uk-modal-body">
                 <h2 class="uk-modal-title uk-text-center">Add more selectors</h2>
-                <p>In the free version of the plugin you can add 1 selector. If you want to add more selectors you can upgrade to the premium version.<br><a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Unlock premium <span class="uk-icon-link" uk-icon="unlock"></span></a></p>
+                <p>In the free version of the plugin you can add 1 selector. If you want to add more selectors you can get the premium version.<br><a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Get premium <span class="uk-icon-link" uk-icon="star"></span></a></p>
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-default uk-modal-close">Close</button>
                 </div>
@@ -55,7 +55,7 @@ class Velo_Product_Selector_Free_Admin_Backend_Pages
                 <div class="uk-container uk-container-expand">
                     <div class="velo-settings-wrap-flex-inner-main">
                         <h3>Create and edit your product selectors</h3>
-                        <a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Unlock premium <span class="uk-icon-link" uk-icon="unlock"></span></a>
+                        <a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Get premium <span class="uk-icon-link" uk-icon="star"></span></a>
                     </div>
                     <div>
                         <div class="velo-product-selector-select">

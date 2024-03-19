@@ -375,7 +375,7 @@ class Velo_Product_Selector_Free_Admin
                 <div class="uk-margin-medium-bottom uk-margin-small-top" uk-grid>
                     <div class="uk-width-expand@m uk-margin-right">
                         <div class="velo-show-max-items-wrapper">
-                            Max items: <span class="velo-show-max-items" uk-tooltip="title: The maximum amount of items is 20. If you want to add more items, you can upgrade to the premium version."><span class="velo-items-now">0</span> / 20 <span class="velo-show-max-items-info" uk-icon="info"></span></span>
+                            Max items: <span class="velo-show-max-items" uk-tooltip="title: The maximum amount of items is 20. If you want to add more items, you can get the premium version."><span class="velo-items-now">0</span> / 20 <span class="velo-show-max-items-info" uk-icon="info"></span></span>
                         </div>
                     </div>
                 </div>
@@ -433,7 +433,7 @@ class Velo_Product_Selector_Free_Admin
                     <div id="too-many-items-modal" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
                             <h2 class="uk-modal-title uk-text-center">Too many items</h2>
-                            <p>The maximum amount of items is 20. If you want to add more items, you can upgrade to the premium version.<br><a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Unlock premium <span class="uk-icon-link" uk-icon="unlock"></span></a></p>
+                            <p>The maximum amount of items is 20. If you want to add more items, you can get the premium version.<br><a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Get premium <span class="uk-icon-link" uk-icon="star"></span></a></p>
                             <div class="uk-modal-footer uk-text-right">
                                 <button class="uk-button uk-button-default uk-modal-close">Close</button>
                             </div>
@@ -775,7 +775,7 @@ class Velo_Product_Selector_Free_Admin
         // Check if the string contains more then 20 chars
         if ($item_count > 20) {
             // Too many items
-            wp_send_json_error('Too many items. The maximum amount of items is 20. If you want to add more items, you can upgrade to the premium version.', 400);
+            wp_send_json_error('Too many items. The maximum amount of items is 20. If you want to add more items, you can get the premium version.', 400);
         }
 
         // Ensure $post_id is a positive integer
