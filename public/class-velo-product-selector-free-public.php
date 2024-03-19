@@ -127,7 +127,6 @@ class Velo_Product_Selector_Free_Public
         echo '<div class="velo-wrapper" data-id="' . esc_attr($id) . '">';
         echo '<div class="velo-loading"><div></div><div></div><div></div></div>';
         echo '</div>';
-        echo '<div class="velo-free-version-credits" style="display:block!important;">🚀 Created with the free Velocity Product Selector by <a href="https://velocityplugins.com/" target="_blank">Velocity Plugins</a></div>';
 
         // Get the contents of the output buffer
         $return_html = ob_get_clean();
