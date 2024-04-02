@@ -412,16 +412,6 @@ class Velo_Product_Selector_Free_Admin
                         </div>
                     </div>
 
-                    <div id="too-many-items-modal" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <h2 class="uk-modal-title uk-text-center">Too many items</h2>
-                            <p>The maximum amount of items is 20. If you want to add more items, you can get the premium version.<br><a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Get premium plugin <span class="uk-icon-link" uk-icon="star"></span></a></p>
-                            <div class="uk-modal-footer uk-text-right">
-                                <button class="uk-button uk-button-default uk-modal-close">Close</button>
-                            </div>
-                        </div>
-                    </div>
-
                     <div id="editor-item-edit-modal" uk-modal>
                         <div class="uk-modal-dialog uk-modal-body">
                             <h2 class="uk-modal-title uk-text-center">Item</h2>

@@ -47,15 +47,6 @@
             });
         }
 
-        // Create product selector button pop-up (premium)
-        $('body').on('click', '.create-product-selector-pup-up-premium', function (event) {
-            if ($('body').find('#multiple-selectors-modal').length > 0) {
-                $('body').find('#multiple-selectors-modal').each(function () {
-                    UIkit.modal($(this)).show();
-                });
-            }
-        });
-
         // Create product selector button pop-up
         $('body').on('click', '.create-product-selector-pup-up', function (event) {
             event.preventDefault();
@@ -293,7 +284,7 @@
                     }
 
                     // Open new dialog
-                    UIkit.modal.dialog('<p class="uk-modal-body velo-create-selector-modal">Product selector is empty. You have to add atleast one item to save the product selector.<br><button class="uk-button uk-button-default uk-modal-close">Ok</button></p>');
+                    UIkit.modal.dialog('<p class="uk-modal-body velo-create-selector-modal">Product selector is empty. You have to add at least one item to save the product selector.<br><button class="uk-button uk-button-default uk-modal-close">Ok</button></p>');
                 }
             }
         });
