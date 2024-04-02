@@ -46,7 +46,6 @@ class Velo_Product_Selector_Free_Admin_Backend_Pages
                 <div class="uk-container uk-container-expand">
                     <div class="velo-settings-wrap-flex-inner-main">
                         <h3>Product selector guide and finder for WooCommerce FREE</h3>
-<!--                        <a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Get premium plugin <span class="uk-icon-link" uk-icon="star"></span></a>-->
                     </div>
                     <div>
                         <div class="velo-product-selector-select">
