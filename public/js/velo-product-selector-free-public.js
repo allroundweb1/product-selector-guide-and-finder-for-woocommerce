@@ -53,7 +53,7 @@
                     const new_level = level + "_nestedData";
                     $.each(data["nestedData"], function (index, nestedItem) {
                         if (nestedItem["type"]) {
-                            const content = nestedItem["image"] ? '<img class="velo-choice-image" src="' + nestedItem["image"] + '" /><br>' + nestedItem["answer"] : nestedItem["answer"];
+                            const content = nestedItem["answer"];
                             if (nestedItem["type"] === 'final-redirect') {
                                 element.find('.velo-choices-wrapper').append('<a href="' + nestedItem["text"] + '" target="_blank" class="velo-inner-choice final-redirect" data-level="' + new_level + '_' + index + '">' + content + '</a>');
                             } else if (nestedItem["type"] === 'final-value') {

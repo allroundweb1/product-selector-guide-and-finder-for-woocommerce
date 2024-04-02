@@ -390,11 +390,8 @@
                         $('body').find('.placeholder-sortable-list').remove();
                     }
 
-                    // Get the image id
-                    const image_id = $('body').find('#velo_image_id').val();
-
                     // Create new item
-                    const newItem = $('<div class="velo-nested-wrapper" data-type="nested" data-image="' + image_id + '" data-title="' + question_val + '" data-answer="' + answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + answer_val + '</span> | <span class="item-title"><strong>Question:</strong> ' + question_val + '</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
+                    const newItem = $('<div class="velo-nested-wrapper" data-type="nested" data-title="' + question_val + '" data-answer="' + answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + answer_val + '</span> | <span class="item-title"><strong>Question:</strong> ' + question_val + '</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
                     const nestedSortable = $('<div class="velo-nested-sortable"></div>');
                     nestedSortable.velosortable(
                         {
@@ -456,7 +453,7 @@
                     }
 
                     // Create new item
-                    const newItem = $('<div class="velo-nested-wrapper" data-type="nested-question" data-image="" data-title="' + question_val + '" data-answer=""><span class="item-title"><strong>Question:</strong> ' + question_val + '</span> <span class="item-answer"></span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
+                    const newItem = $('<div class="velo-nested-wrapper" data-type="nested-question" data-title="' + question_val + '" data-answer=""><span class="item-title"><strong>Question:</strong> ' + question_val + '</span> <span class="item-answer"></span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
                     const nestedSortable = $('<div class="velo-nested-sortable"></div>');
                     nestedSortable.velosortable(
                         {
@@ -523,11 +520,8 @@
                 $('body').find('#velo-autocomplete-search-field').val('');
                 $('body').find('#velo-autocomplete-answer-field').val('');
 
-                // Get the image id
-                const image_id = $('body').find('#velo_image_id').val();
-
                 // Create new item
-                const newItem = $('<div class="velo-nested-wrapper" data-type="final-value" data-image="' + image_id + '" data-title="' + selected_item_val + '" data-answer="' + answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + answer_val + '</span> | <span class="item-title"><strong>Value:</strong> ' + selected_item_val + '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
+                const newItem = $('<div class="velo-nested-wrapper" data-type="final-value" data-title="' + selected_item_val + '" data-answer="' + answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + answer_val + '</span> | <span class="item-title"><strong>Value:</strong> ' + selected_item_val + '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
 
                 // Add new item to the existing sortable element
                 parentElement.children('.velo-nested-sortable').first().append(newItem);
@@ -572,11 +566,8 @@
                 // Get sortable list
                 let sortableList = $('body').find('#velo-sortable-list');
 
-                // Get the image id
-                const image_id = $('body').find('#velo_image_id').val();
-
                 // Create new item
-                const newItem = $('<div class="velo-nested-wrapper" data-type="final-redirect" data-image="' + image_id + '" data-title="' + redirect_url_val + '" data-answer="' + redirect_answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + redirect_answer_val + '</span> | <span class="item-title"><strong>Redirect:</strong> ' + redirect_url_val + '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
+                const newItem = $('<div class="velo-nested-wrapper" data-type="final-redirect" data-title="' + redirect_url_val + '" data-answer="' + redirect_answer_val + '"><span class="item-answer"><strong>Answer:</strong> ' + redirect_answer_val + '</span> | <span class="item-title"><strong>Redirect:</strong> ' + redirect_url_val + '</span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span></div>');
 
                 // Add new item to the existing sortable element
                 parentElement.children('.velo-nested-sortable').first().append(newItem);
@@ -696,31 +687,15 @@
                 // Set the answer of the item in the text field
                 $('body').find('#velo-edit-answer-field').val('');
 
-                // Set the image ID in the hidden input
-                $('body').find('#velo_image_id').val('');
-
-                // Clear (old) image preview html
-                $('body').find('#velo-preview-image').html('');
             } else {
                 // Set the title of the item in the text field
                 $('body').find('#velo-edit-text-field').val(parentElement.attr('data-title'));
 
                 // Set the answer of the item in the text field
                 $('body').find('#velo-edit-answer-field').val(parentElement.attr('data-answer'));
-
-                // Set the image ID in the hidden input
-                $('body').find('#velo_image_id').val(parentElement.attr('data-image'));
-
-                // Clear (old) image preview html
-                $('body').find('#velo-preview-image').html('');
-
-                // Set the image preview
-                if (parentElement.attr('data-image') != '') {
-                    velo_refresh_image_view_editor(parentElement.attr('data-image'));
-                }
             }
 
-            // Set the image ID in the hidden input
+            // Set the hidden input
             const velo_edit_type = parentElement.attr('data-type').trim();
 
             if (is_new_item === true) {
@@ -846,13 +821,11 @@
             if (velo_element_type === 'nested') {
                 parentElement.attr('data-title', $('body').find('#velo-edit-text-field').val());
                 parentElement.attr('data-answer', $('body').find('#velo-edit-answer-field').val());
-                parentElement.attr('data-image', $('body').find('#velo_image_id').val());
                 parentElement.children('.item-title').first().html('<strong>Question:</strong> ' + $('body').find('#velo-edit-text-field').val());
                 parentElement.children('.item-answer').first().html('<strong>Answer:</strong> ' + $('body').find('#velo-edit-answer-field').val());
             } else {
                 parentElement.attr('data-title', $('body').find('#velo-edit-text-field').val());
                 parentElement.attr('data-answer', '');
-                parentElement.attr('data-image', $('body').find('#velo_image_id').val());
                 parentElement.children('.item-title').first().html('<strong>Question:</strong> ' + $('body').find('#velo-edit-text-field').val());
             }
 
@@ -862,18 +835,6 @@
                     UIkit.modal($(this)).hide();
                 });
             }
-        });
-
-        // Remove image from question
-        $('body').on('click', '#velo_remove_image_from_question', function (event) {
-            // Prevent the default behavior of the event
-            event.preventDefault();
-
-            // Empty hidden image id input
-            $('body').find('#velo_image_id').val('');
-
-            // Remove image preview
-            $('body').find('#velo-preview-image').html('');
         });
 
         // Copy shortcode to clipboard
@@ -892,64 +853,6 @@
             const clone = $(this).closest('.velo-nested-wrapper').clone();
             $(this).closest('.velo-nested-sortable').prepend(clone);
         });
-
-        // Foreach item, get image
-        function set_images_in_backend() {
-            // First check if we got some nested wrappers
-            if ($('body').find('.velo-nested-wrapper').length > 0 && window.VeloBackendImagesLoading !== true) {
-                let all_images_arr = [];
-                $('body').find('.velo-nested-wrapper').each(function () {
-                    if ($(this).attr('data-image') != '') {
-                        if ($(this).find('> img').length === 0) {
-                            all_images_arr.push($(this).attr('data-image'));
-                        }
-                    }
-                });
-
-                if (all_images_arr.length > 0) {
-                    window.VeloBackendImagesLoading = true; // Global variable to prevent multiple requests
-                    $.ajax({
-                        url: velo_product_selector.ajax_url,
-                        type: 'POST',
-                        data: {
-                            action: 'velo_get_all_images_for_backend',
-                            nonce: velo_product_selector.ajax_settings_nonce,
-                            images: all_images_arr
-                        },
-                        success: function (response) {
-                            window.VeloBackendImagesLoading = false; // Global variable to prevent multiple requests
-                            if (response.data) {
-                                if (response.data.images) {
-                                    for (let i = 0; i < response.data.images.length; i++) {
-                                        const image_id = response.data.images[i].id;
-                                        const image_url = response.data.images[i].url;
-                                        $('body').find('.velo-nested-wrapper[data-image="' + image_id + '"]').each(function () {
-                                            if ($(this).find('> img').length === 0) {
-                                                $(this).prepend('<img src="' + image_url + '" alt="Image" class="velo-mini-image-backend">');
-                                            }
-                                        });
-                                    }
-                                } else {
-                                    console.log('No data received.');
-                                }
-                            } else {
-                                console.log('No data received.');
-                            }
-                        },
-                        error: function (xhr, status, error) {
-                            window.VeloBackendImagesLoading = false; // Global variable to prevent multiple requests
-                            alert('Something went wrong. Please try again.');
-                            console.log(xhr);
-                            console.log(status);
-                            console.log(error);
-                        }
-                    });
-                }
-            }
-        }
-
-        // Try to refresh images every 2 seconds
-        setInterval(set_images_in_backend, 2000);
 
         // Show success text for copying the shortcode
         function show_success_copied_shortcode() {
@@ -972,15 +875,14 @@
                 const text = $(this).attr('data-title').trim();
                 const answer = $(this).attr('data-answer').trim();
                 const type = $(this).attr('data-type').trim();
-                const image = $(this).attr('data-image').trim();
                 const nestedSortables = $(this).children('.velo-nested-sortable');
                 if (nestedSortables.length > 0) {
                     nestedSortables.each(function () {
                         const nestedData = velo_save_nested_sortable_data($(this));
-                        data.push({ text: text, type: type, image: image, answer: answer, nestedData: nestedData });
+                        data.push({ text: text, type: type, answer: answer, nestedData: nestedData });
                     });
                 } else {
-                    data.push({ text: text, type: type, image: image, answer: answer });
+                    data.push({ text: text, type: type, answer: answer });
                 }
             });
 
@@ -1040,88 +942,6 @@
             // Prevent the default behavior of the event
             event.preventDefault();
         });
-
-        // Pop-up image selector
-        $('body').on('click', 'input#velo_media_manager', function (event) {
-            // Prevent default behavior of button
-            event.preventDefault();
-
-            // Default variable for the image frame
-            let image_frame;
-
-            // Define image_frame as wp.media object
-            image_frame = wp.media({
-                title: 'Select Media',
-                multiple: false, // Set to false to allow only single selection
-                library: {
-                    type: 'image', // Set to 'image' to only allow selection of images
-                }
-            });
-
-            // On WP image/media frame open
-            image_frame.on('open', function () {
-                // On open, get the id from the hidden input
-                // and select the appropriate images in the media manager
-                let selection = image_frame.state().get('selection');
-                let ids = $('body').find('input#velo_image_id').val().split(',');
-                ids.forEach(function (id) {
-                    let attachment = wp.media.attachment(id);
-                    attachment.fetch();
-                    selection.add(attachment ? [attachment] : []);
-                });
-            });
-
-            // On WP image/media frame close
-            image_frame.on('close', function () {
-                // On close, get selections and save to the hidden input
-                // plus other AJAX stuff to refresh the image preview
-                let selection = image_frame.state().get('selection');
-                let gallery_ids = new Array();
-                let my_index = 0;
-                selection.each(function (attachment) {
-                    gallery_ids[my_index] = attachment['id'];
-                    my_index++;
-                });
-                let ids = gallery_ids.join(",");
-                if (ids.length === 0) return true;//if closed withput selecting an image
-                $('body').find('input#velo_image_id').val(ids);
-                velo_refresh_image_view_editor(ids);
-            });
-
-            // Open WP image/media frame
-            image_frame.open();
-        });
-
-        // Ajax request to refresh/view the image preview
-        function velo_refresh_image_view_editor(image_id) {
-            $.ajax({
-                url: velo_product_selector.ajax_url,
-                type: 'POST',
-                data: {
-                    action: 'velo_get_image_for_editor',
-                    nonce: velo_product_selector.ajax_settings_nonce,
-                    image_id: image_id
-                },
-                success: function (response) {
-                    if (response.data) {
-                        if (response.data.image_html) {
-                            $('body').find('#velo-preview-image').html(response.data.image_html);
-                            $('body').find('#velo-preview-image').append('<button type="button" class="uk-button uk-button-danger" id="velo_remove_image_from_question"><span class="uk-icon-link" uk-icon="trash"></span></button>');
-                        } else {
-                            alert('No image selected.');
-                        }
-                    } else {
-                        alert('Something went wrong. Please try again.');
-                    }
-                },
-                error: function (xhr, status, error) {
-                    alert('Something went wrong. Please try again.');
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(error);
-                }
-            });
-        }
 
         // Success message in top center screen
         function showSuccessNotification(message) {
