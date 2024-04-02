@@ -1,38 +1,6 @@
 (function ($) {
     'use strict';
 
-    function veloUpdateShowMaxItemsItem() {
-        const nestedWrapperCount = $('.velo-selector-editor .velo-nested-wrapper').length;
-        const showMaxItemsItem = $('.velo-show-max-items');
-
-        $('.velo-items-now').text(nestedWrapperCount);
-
-        if (nestedWrapperCount > 14 && nestedWrapperCount < 20) {
-            showMaxItemsItem.removeClass('velo-show-red');
-            showMaxItemsItem.addClass('velo-show-orange');
-        } else if (nestedWrapperCount > 19) {
-            showMaxItemsItem.removeClass('velo-show-orange');
-            showMaxItemsItem.addClass('velo-show-red');
-        } else {
-            showMaxItemsItem.removeClass('velo-show-orange');
-            showMaxItemsItem.removeClass('velo-show-red');
-        }
-    }
-
-    $(document).ready(function () {
-
-        let timeoutId;
-        const observer = new MutationObserver(function () {
-            console.log('Changes detected in the dynamically generated elements within the target element');
-
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(veloUpdateShowMaxItemsItem, 1500);
-        });
-
-        const config = { childList: true, subtree: true };
-        observer.observe($('.velo-selector-editor')[0], config);
-    });
-
     $(document).ready(function () {
         // Check if we got the 'velo-product-selector-select' div on the admin settings page, then automatically load the 'product selector' select
         if ($('.main-settings-wrap .velo-product-selector-select').length) {
@@ -251,10 +219,6 @@
                                         );
                                     });
 
-                                    // Update the show max items item
-                                    console.log('Element ready to update show max items item.');
-                                    veloUpdateShowMaxItemsItem();
-
                                 })
                                 .catch((error) => {
                                     console.log('Something went wrong with the smooth transition.');
@@ -280,17 +244,6 @@
 
         // Save edited product selector
         $('body').on('click', '.velo-save-edited-product-selector', function (event) {
-            // ITEM COUNT CHECK
-            // Count the number of items with the class '.velo-nested-wrapper'
-            const count_nested_wrappers = $('.velo-selector-editor .velo-nested-wrapper').length;
-            if (count_nested_wrappers > 20) {
-                if ($('body').find('#too-many-items-modal').length > 0) {
-                    $('body').find('#too-many-items-modal').each(function () {
-                        UIkit.modal($(this)).show();
-                    });
-                }
-                return;
-            }
 
             // Get sortable list
             let sortableList = $('body').find('#velo-sortable-list');

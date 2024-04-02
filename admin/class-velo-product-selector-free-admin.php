@@ -177,7 +177,7 @@ class Velo_Product_Selector_Free_Admin
             echo '</select>';
             echo '<button type="button" class="uk-button uk-button-primary uk-margin-left edit-single-product-selector">Select</button>';
             echo '<span class="uk-margin-left uk-margin-right"> or </span>';
-            echo '<button type="button" class="uk-button uk-button-default create-product-selector-pup-up-premium">Create new selector</button>';
+            echo '<button type="button" class="uk-button uk-button-default create-product-selector-pup-up">Create new selector</button>';
         } else {
             echo '<button type="button" class="uk-button uk-button-primary create-product-selector-pup-up">Create your first selector 🚀</button>';
         }
@@ -239,17 +239,6 @@ class Velo_Product_Selector_Free_Admin
         // Check if slug already exists
         if (get_page_by_path($slug, OBJECT, 'velo_selectors')) {
             wp_send_json_error('Slug already exists. <br><button type="button" class="uk-button uk-button-default uk-margin-top create-product-selector-pup-up">Try again</button>', 400);
-        }
-
-        $args = array(
-            'post_type' => 'velo_selectors',
-            'posts_per_page' => -1,
-        );
-        $query = new WP_Query($args);
-        if (!empty($query->posts)) {
-            foreach ($query->posts as $post) {
-                wp_delete_post($post->ID, true);
-            }
         }
 
         $new_post = array(
@@ -370,13 +359,6 @@ class Velo_Product_Selector_Free_Admin
                     <div class="uk-width-1-2@m uk-padding-remove-left uk-text-right velo-shortcode-preview-wrapper">
                         <span class="velo-mini-text-shortcode">Shortcode: </span>
                         <div class="velo-shortcode-preview"><span class="velo-copy-success">Shortcode copied to clipboard</span><span class="velo-pure-shortcode">[velo_show_product_selector id="<?php echo esc_html($post_id); ?>"]</span><span uk-icon="copy"></span></div>
-                    </div>
-                </div>
-                <div class="uk-margin-medium-bottom uk-margin-small-top" uk-grid>
-                    <div class="uk-width-expand@m uk-margin-right">
-                        <div class="velo-show-max-items-wrapper">
-                            Max items: <span class="velo-show-max-items" uk-tooltip="title: The maximum amount of items is 20. If you want to add more items, you can get the premium version."><span class="velo-items-now">0</span> / 20 <span class="velo-show-max-items-info" uk-icon="info"></span></span>
-                        </div>
                     </div>
                 </div>
 
@@ -767,15 +749,6 @@ class Velo_Product_Selector_Free_Admin
         // Check if the JSON encoding/decoding process was successful
         if (json_last_error() !== JSON_ERROR_NONE) {
             wp_send_json_error('Invalid JSON data.', 400);
-        }
-
-        // Count the items
-        $item_count = substr_count($encoded_data, '"text":');
-
-        // Check if the string contains more then 20 chars
-        if ($item_count > 20) {
-            // Too many items
-            wp_send_json_error('Too many items. The maximum amount of items is 20. If you want to add more items, you can get the premium version.', 400);
         }
 
         // Ensure $post_id is a positive integer
