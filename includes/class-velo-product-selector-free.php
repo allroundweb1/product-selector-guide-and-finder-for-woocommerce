@@ -154,6 +154,8 @@ class Velo_Product_Selector_Free
         $this->loader->add_action('wp_ajax_velo_search_posts_callback', $plugin_admin, 'velo_ajax_search_posts_callback');
         $this->loader->add_action('wp_ajax_velo_save_edited_product_selector', $plugin_admin, 'velo_ajax_save_edited_product_selector');
         $this->loader->add_action('wp_ajax_velo_delete_product_selector', $plugin_admin, 'velo_ajax_delete_product_selector');
+	    $this->loader->add_action('wp_ajax_velo_get_image_for_editor', $plugin_admin, 'velo_ajax_get_image_for_editor');
+	    $this->loader->add_action('wp_ajax_velo_get_all_images_for_backend', $plugin_admin, 'velo_ajax_get_all_images_for_backend');
     }
 
     /**
