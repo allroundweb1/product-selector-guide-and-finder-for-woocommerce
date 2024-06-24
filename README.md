@@ -7,15 +7,15 @@ Expand the capabilities of your WordPress site with Velocity Plugins. Our unique
 - **Link:** [VelocityPlugins.com](https://VelocityPlugins.com)
 - **Tags:** VelocityPlugins, WooCommerce, Products
 - **Requires at least:** 6.0.0
-- **Tested up to:** 6.4
-- **Stable tag:** 1.0.1
+- **Tested up to:** 6.5.4
+- **Stable tag:** 1.0.3
 - **License:** [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.txt)
 
 ## Third-Party Services
 
 This plugin relies on the following third-party services:
 
-1. **uikit-3.19.1:** A lightweight and modular front-end framework for developing fast and powerful web interfaces. [More Info](https://getuikit.com/)
+1. **uikit-3.21.5:** A lightweight and modular front-end framework for developing fast and powerful web interfaces. [More Info](https://getuikit.com/)
 2. **sortable-1.15.2:** A JavaScript library for reorderable drag-and-drop lists. [More Info](https://sortablejs.github.io/Sortable/)
 3. **select2-4.0.13:** A jQuery-based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results. [More Info](https://select2.org/)
 

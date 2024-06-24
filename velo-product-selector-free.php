@@ -1,12 +1,7 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
+ * VelocityPlugins
  *
  * @link              https://velocityplugins.com
  * @since             1.0.0
@@ -16,7 +11,7 @@
  * Plugin Name:       Product selector guide and finder for WooCommerce
  * Plugin URI:        https://velocityplugins.com
  * Description:       Expand the capabilities of your WordPress site with Velocity Plugins. With this unique product selector tool you can help your users even better to get to the right product! This can lead to more sales and a better user experience.
- * Version:           1.0.1
+ * Version:           1.0.3
  * Author:            VelocityPlugins
  * Author URI:        https://profiles.wordpress.org/velocityplugins/
  * License:           GPL-2.0+
@@ -29,11 +24,9 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * Currently plugin version
  */
-define( 'VELO_PRODUCT_SELECTOR_FREE_VERSION', '1.0.1' );
+define( 'VELO_PRODUCT_SELECTOR_FREE_VERSION', '1.0.3' );
 
 /**
  * Plugin root file

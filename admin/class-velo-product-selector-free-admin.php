@@ -75,7 +75,7 @@ class Velo_Product_Selector_Free_Admin
             wp_enqueue_style($this->plugin_name . '-select2', plugin_dir_url(__FILE__) . 'library/select2-4.0.13/select2.css', array(), '4.0.13', 'all');
 
             // Enqueue uikit CSS file
-            wp_enqueue_style($this->plugin_name . '-uikit', plugin_dir_url(__FILE__) . 'library/uikit-3.19.1/css/uikit.min.css', array(), '3.19.1', 'all');
+            wp_enqueue_style($this->plugin_name . '-uikit', plugin_dir_url(__FILE__) . 'library/uikit-3.21.5/css/uikit.min.css', array(), '3.19.1', 'all');
         }
     }
 
@@ -99,8 +99,8 @@ class Velo_Product_Selector_Free_Admin
             wp_enqueue_script($this->plugin_name . '-select2', plugin_dir_url(__FILE__) . 'library/select2-4.0.13/select2.js', array('jquery'), '4.0.13', false);
 
             // Enqueue uikit JS files
-            wp_enqueue_script($this->plugin_name . '-uikit', plugin_dir_url(__FILE__) . 'library/uikit-3.19.1/js/uikit.min.js', array('jquery'), '3.19.1', false);
-            wp_enqueue_script($this->plugin_name . '-uikit-icons', plugin_dir_url(__FILE__) . 'library/uikit-3.19.1/js/uikit-icons.min.js', array('jquery', $this->plugin_name . '-uikit'), '3.19.1', false);
+            wp_enqueue_script($this->plugin_name . '-uikit', plugin_dir_url(__FILE__) . 'library/uikit-3.21.5/js/uikit.min.js', array('jquery'), '3.19.1', false);
+            wp_enqueue_script($this->plugin_name . '-uikit-icons', plugin_dir_url(__FILE__) . 'library/uikit-3.21.5/js/uikit-icons.min.js', array('jquery', $this->plugin_name . '-uikit'), '3.19.1', false);
 
             // Enqueue sortable JS file
             wp_enqueue_script($this->plugin_name . '-sortable', plugin_dir_url(__FILE__) . 'library/sortable-1.15.2/js/sortable.min.js', array('jquery'), '1.15.2', false);
@@ -456,12 +456,6 @@ class Velo_Product_Selector_Free_Admin
 
                                     <label for="velo-redirect-url-field">Add final step item: redirect URL (or <span class="velo-switch-back-final">switch back</span>)</label>
                                     <input class="uk-input uk-margin-bottom" type="text" placeholder="https://redirect-url..." aria-label="" id="velo-redirect-url-field">
-                                </div>
-
-                                <!-- Image upsell -->
-                                <div class="velo-media-preview-and-upload">
-                                    <p style="margin-bottom: 4px;">Want to add an image to this item?</p>
-                                    <a href="https://velocityplugins.com/" class="velo-unlock-premium-button" target="_blank">Get premium <span class="uk-icon-link" uk-icon="star"></span></a>
                                 </div>
 
                                 <!-- All three add buttons -->

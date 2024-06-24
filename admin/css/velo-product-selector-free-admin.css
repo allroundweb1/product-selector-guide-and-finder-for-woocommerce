@@ -420,43 +420,6 @@ body .create-redirect-url-button {
     margin: 0;
 }
 
-.velo-unlock-premium-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    color: #ffffff;
-    background-color: #f87d00;
-    border: 1px solid #ffffff;
-    text-decoration: none !important;
-}
-
-#too-many-items-modal .velo-unlock-premium-button,
-#multiple-selectors-modal .velo-unlock-premium-button {
-    margin-left: 0;
-    margin-top: 20px;
-}
-
-.velo-unlock-premium-button:hover {
-    color: #f87d00;
-    background-color: #ffffff;
-    border: 1px solid #f87d00;
-}
-
-.velo-unlock-premium-button a,
-.velo-unlock-premium-button span {
-    color: #ffffff;
-    text-decoration: none !important;
-}
-
-.velo-unlock-premium-button:hover a,
-.velo-unlock-premium-button:hover span {
-    color: #f87d00;
-    text-decoration: none !important;
-}
-
 .velo-settings-wrap-flex-inner-main {
     display: flex;
     flex-direction: row;
