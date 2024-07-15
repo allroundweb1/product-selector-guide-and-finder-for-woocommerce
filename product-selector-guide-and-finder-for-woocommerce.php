@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Currently plugin version
  */
-define( 'VELO_PRODUCT_SELECTOR_FREE_VERSION', '1.0.3' );
+define( 'VELO_PRODUCT_SELECTOR_FREE_VERSION', '1.0.4' );
 
 /**
  * Plugin root file
