@@ -81,7 +81,7 @@ class Velo_Product_Selector_Free_Public
         $variable_array = array();
         $variable_array['ajax_url'] = admin_url('admin-ajax.php');
         $variable_array['velo_frontend_ajax_nonce'] = wp_create_nonce('velo_frontend_ajax_nonce');
-        $variable_array['velo_back_text'] = __('Back', 'velo-product-selector-free');
+        $variable_array['velo_back_text'] = __('Back', 'product-selector-guide-and-finder-for-woocommerce');
         wp_localize_script($this->plugin_name, 'velo_product_selector', $variable_array);
     }
 

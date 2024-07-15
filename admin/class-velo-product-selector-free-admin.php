@@ -130,8 +130,8 @@ class Velo_Product_Selector_Free_Admin
             'capability_type'     => 'post',
             'has_archive'         => false,
             'labels'              => array(
-                'name'               => __('Velo Selectors', 'velo-product-selector-free'),
-                'singular_name'      => __('Velo Selector', 'velo-product-selector-free'),
+                'name'               => __('Velo Selectors', 'product-selector-guide-and-finder-for-woocommerce'),
+                'singular_name'      => __('Velo Selector', 'product-selector-guide-and-finder-for-woocommerce'),
             ),
             'supports' => array('title', 'editor', 'custom-fields'),
         );

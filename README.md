@@ -21,5 +21,5 @@ This plugin relies on the following third-party services:
 
 ## Installation
 
-1. Upload `velo-product-selector-free` to the `/wp-content/plugins/` directory.
+1. Upload `product-selector-guide-and-finder-for-woocommerce` to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.

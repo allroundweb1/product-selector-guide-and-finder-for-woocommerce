@@ -77,7 +77,7 @@ class Velo_Product_Selector_Free
         } else {
             $this->version = '1.0.0';
         }
-        $this->plugin_name = 'velo-product-selector-free';
+        $this->plugin_name = 'product-selector-guide-and-finder-for-woocommerce';
 
         $this->load_dependencies();
         $this->define_admin_hooks();
