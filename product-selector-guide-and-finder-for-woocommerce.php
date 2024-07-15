@@ -11,7 +11,7 @@
  * Plugin Name:       Product selector guide and finder for WooCommerce
  * Plugin URI:        https://velocityplugins.com
  * Description:       Expand the capabilities of your WordPress site with Velocity Plugins. With this unique product selector tool you can help your users even better to get to the right product! This can lead to more sales and a better user experience.
- * Version:           1.0.4
+ * Version:           1.0.5
  * Author:            VelocityPlugins
  * Author URI:        https://profiles.wordpress.org/velocityplugins/
  * License:           GPL-2.0+
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Currently plugin version
  */
-define( 'VELO_PRODUCT_SELECTOR_FREE_VERSION', '1.0.4' );
+define( 'VELO_PRODUCT_SELECTOR_FREE_VERSION', '1.0.5' );
 
 /**
  * Plugin root file

@@ -1,6 +1,37 @@
 (function ($) {
     'use strict';
 
+    function veloUpdateShowMaxItemsItem() {
+        const nestedWrapperCount = $('.velo-selector-editor .velo-nested-wrapper').length;
+        const showMaxItemsItem = $('.velo-show-max-items');
+
+        $('.velo-items-now').text(nestedWrapperCount);
+
+        if (nestedWrapperCount > 14 && nestedWrapperCount < 20) {
+            showMaxItemsItem.removeClass('velo-show-red');
+            showMaxItemsItem.addClass('velo-show-orange');
+        } else if (nestedWrapperCount > 19) {
+            showMaxItemsItem.removeClass('velo-show-orange');
+            showMaxItemsItem.addClass('velo-show-red');
+        } else {
+            showMaxItemsItem.removeClass('velo-show-orange');
+            showMaxItemsItem.removeClass('velo-show-red');
+        }
+    }
+
+    $(document).ready(function () {
+        let timeoutId;
+        const observer = new MutationObserver(function () {
+            console.log('Changes detected in the dynamically generated elements within the target element');
+
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(veloUpdateShowMaxItemsItem, 1500);
+        });
+
+        const config = { childList: true, subtree: true };
+        observer.observe($('.velo-selector-editor')[0], config);
+    });
+
     $(document).ready(function () {
         // Check if we got the 'velo-product-selector-select' div on the admin settings page, then automatically load the 'product selector' select
         if ($('.main-settings-wrap .velo-product-selector-select').length) {
@@ -210,6 +241,8 @@
                                         );
                                     });
 
+                                    // Update the show max items item
+                                    veloUpdateShowMaxItemsItem();
                                 })
                                 .catch((error) => {
                                     console.log('Something went wrong with the smooth transition.');
@@ -264,15 +297,19 @@
                                 showSuccessNotification('Product selector saved successfully.');
                             } else {
                                 $('body').find('.velo-save-edited-product-selector .uk-spinner').remove();
-                                alert('Something went wrong. Please try again.');
+                                UIkit.modal.dialog('<p class="uk-modal-body velo-create-selector-modal">Something went wrong. Please try again.<br><br><button class="uk-button uk-button-default uk-modal-close">Ok</button> <a href="https://velocityplugins.com/" target="_blank" class="uk-button uk-button-primary">Visit plugin website</a></p>');
                             }
                         },
                         error: function (xhr, status, error) {
                             $('body').find('.velo-save-edited-product-selector .uk-spinner').remove();
-                            alert('Something went wrong. Please try again.');
                             console.log(xhr);
                             console.log(status);
                             console.log(error);
+                            // Get the responseJSON and display it via UiKit modal
+                            let responseJSON = JSON.parse(xhr.responseText);
+                            if (responseJSON.data && responseJSON.data) {
+                                UIkit.modal.dialog('<p class="uk-modal-body velo-create-selector-modal">' + responseJSON.data + '<br><br><button class="uk-button uk-button-default uk-modal-close">Ok</button> <a href="https://velocityplugins.com/" target="_blank" class="uk-button uk-button-primary">Visit plugin website</a></p>');
+                            }
                         }
                     });
                 } else {
@@ -284,7 +321,7 @@
                     }
 
                     // Open new dialog
-                    UIkit.modal.dialog('<p class="uk-modal-body velo-create-selector-modal">Product selector is empty. You have to add at least one item to save the product selector.<br><button class="uk-button uk-button-default uk-modal-close">Ok</button></p>');
+                    UIkit.modal.dialog('<p class="uk-modal-body velo-create-selector-modal">Product selector is empty. You have to add at least one item to save the product selector.<br><br><button class="uk-button uk-button-default uk-modal-close">Ok</button></p>');
                 }
             }
         });
@@ -323,7 +360,7 @@
                                 $('body').find('.velo-delete-edited-product-selector .uk-spinner').remove();
                             } else {
                                 $('body').find('.velo-delete-edited-product-selector .uk-spinner').remove();
-                                alert('Something went wrong. Please try again.');
+                                UIkit.modal.dialog('<p class="uk-modal-body velo-create-selector-modal">Something went wrong. Please try again.<br><br><button class="uk-button uk-button-default uk-modal-close">Ok</button> <a href="https://velocityplugins.com/" target="_blank" class="uk-button uk-button-primary">Visit plugin website</a></p>');
                             }
 
                             // Trigger refresh
@@ -333,10 +370,15 @@
                         },
                         error: function (xhr, status, error) {
                             $('body').find('.velo-delete-edited-product-selector .uk-spinner').remove();
-                            alert('Something went wrong. Please try again.');
                             console.log(xhr);
                             console.log(status);
                             console.log(error);
+
+                            // Get the responseJSON and display it via UiKit modal
+                            let responseJSON = JSON.parse(xhr.responseText);
+                            if (responseJSON.data && responseJSON.data) {
+                                UIkit.modal.dialog('<p class="uk-modal-body velo-create-selector-modal">' + responseJSON.data + '<br><br><button class="uk-button uk-button-default uk-modal-close">Ok</button> <a href="https://velocityplugins.com/" target="_blank" class="uk-button uk-button-primary">Visit plugin website</a></p>');
+                            }
 
                             // Trigger refresh
                             setTimeout(function () {

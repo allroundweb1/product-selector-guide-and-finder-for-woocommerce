@@ -11,7 +11,7 @@
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
 /**
  * The admin-specific functionality of the plugin.
@@ -141,10 +141,10 @@ class Velo_Product_Selector_Free_Admin
     // Function to get the product selector select (dropdown) and buttons to create a new product selector
     function velo_ajax_product_selector_select_and_create()
     {
-	    // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        // Check if the nonce is valid, if not, return error
+        if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
         // Create OB to get the HTML
         ob_start();
@@ -216,10 +216,10 @@ class Velo_Product_Selector_Free_Admin
     // Function to create a new product selector
     function velo_ajax_create_selector()
     {
-	    // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        // Check if the nonce is valid, if not, return error
+        if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
         // Check if all required fields are set
         if (!isset($_REQUEST['name'])) {
@@ -268,10 +268,10 @@ class Velo_Product_Selector_Free_Admin
     // Function to get the pop-up form to create a new selector
     function velo_ajax_get_form_to_create_selector()
     {
-	    // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        // Check if the nonce is valid, if not, return error
+        if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
         // Create OB to get the HTML
         ob_start();
@@ -306,9 +306,9 @@ class Velo_Product_Selector_Free_Admin
     function velo_ajax_get_single_product_selector_editor()
     {
         // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
         // Check if all required fields are set
         if (!isset($_REQUEST['product_selector_id'])) {
@@ -331,16 +331,16 @@ class Velo_Product_Selector_Free_Admin
             wp_send_json_error('This item does not exist.', 400);
         }
 
-	    // Check for previous sortable list content, otherwise show a placeholder
-	    $sortable_data_found = false;
-	    $sortable_data = '<div class="placeholder-sortable-list">This product selector is empty. Create your first question to start 🎉</div>';
-	    $sortable_json_data_meta = get_post_meta($post_id, 'velo_product_selector_data', true);
-	    if (!empty($sortable_json_data_meta)) {
-		    // Do logic if there is a sortable list
-		    $sortable_data_found = true;
-		    $sortable_data = $this->velo_get_sortablejs_html($sortable_json_data_meta);
-		    // $sortable_data = print_r($sortable_json_data_meta, true);
-	    }
+        // Check for previous sortable list content, otherwise show a placeholder
+        $sortable_data_found = false;
+        $sortable_data = '<div class="placeholder-sortable-list">This product selector is empty. Create your first question to start 🎉</div>';
+        $sortable_json_data_meta = get_post_meta($post_id, 'velo_product_selector_data', true);
+        if (!empty($sortable_json_data_meta)) {
+            // Do logic if there is a sortable list
+            $sortable_data_found = true;
+            $sortable_data = $this->velo_get_sortablejs_html($sortable_json_data_meta);
+            // $sortable_data = print_r($sortable_json_data_meta, true);
+        }
 
         // Create OB to get the HTML
         ob_start();
@@ -359,6 +359,13 @@ class Velo_Product_Selector_Free_Admin
                     <div class="uk-width-1-2@m uk-padding-remove-left uk-text-right velo-shortcode-preview-wrapper">
                         <span class="velo-mini-text-shortcode">Shortcode: </span>
                         <div class="velo-shortcode-preview"><span class="velo-copy-success">Shortcode copied to clipboard</span><span class="velo-pure-shortcode">[velo_show_product_selector id="<?php echo esc_html($post_id); ?>"]</span><span uk-icon="copy"></span></div>
+                    </div>
+                </div>
+                <div class="uk-margin-medium-bottom uk-margin-small-top" uk-grid>
+                    <div class="uk-width-expand@m uk-margin-right">
+                        <div class="velo-show-max-items-wrapper">
+                            Max items: <span class="velo-show-max-items" uk-tooltip="title: The maximum number allowed is 20. For information on adding more items, please visit our website."><span class="velo-items-now">0</span> / 20 <span class="velo-show-max-items-info" uk-icon="info"></span></span>
+                        </div>
                     </div>
                 </div>
 
@@ -530,14 +537,14 @@ class Velo_Product_Selector_Free_Admin
 
                     if ($data_row['type'] === 'nested-question') {
                         // Main question (begin question)
-	                    printf(
-		                    '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
-		                    esc_html($data_row['text']),
-		                    esc_html($data_row['answer']),
-		                    esc_attr($data_row['type']),
-		                    esc_html($data_row['answer']),
-		                    esc_html($data_row['text'])
-	                    );
+                        printf(
+                            '<div class="velo-nested-wrapper" data-title="%s" data-answer="%s" data-type="%s"><span class="item-answer"><strong>Answer:</strong> %s</span> | <span class="item-title"><strong>Question:</strong> %s</span> <span class="uk-icon-link velo-add-sub-item-product-editor" uk-icon="plus-circle"></span> <span class="uk-icon-link velo-add-copy-item-product-editor" uk-icon="copy"></span> <span class="uk-icon-link velo-edit-item-product-editor" uk-icon="file-edit"></span> <span class="uk-icon-link velo-remove-item-product-editor" uk-icon="trash"></span>',
+                            esc_html($data_row['text']),
+                            esc_html($data_row['answer']),
+                            esc_attr($data_row['type']),
+                            esc_html($data_row['answer']),
+                            esc_html($data_row['text'])
+                        );
                     } else {
                         // Nested question
                         printf(
@@ -620,44 +627,44 @@ class Velo_Product_Selector_Free_Admin
     // Search autocomplete callback
     function velo_ajax_search_posts_callback()
     {
-	    // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        // Check if the nonce is valid, if not, return error
+        if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
         // Check if all required fields are set
         if (!isset($_REQUEST['query'])) {
             wp_send_json_error('Not all required fields are set.', 400);
         }
 
-	    $search_query = filter_input(INPUT_POST, 'query', FILTER_SANITIZE_STRING);
-	    $results = array();
+        $search_query = filter_input(INPUT_POST, 'query', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $results = array();
 
-        if(empty($search_query)) wp_send_json_error('No search query.', 400);
+        if (empty($search_query)) wp_send_json_error('No search query.', 400);
 
-	    $query = new WP_Query(array(
-		    's' => $search_query,
-		    'post_type' => array('post', 'page', 'product'),
-		    'posts_per_page' => -1,
-	    ));
+        $query = new WP_Query(array(
+            's' => $search_query,
+            'post_type' => array('post', 'page', 'product'),
+            'posts_per_page' => -1,
+        ));
 
-	    while ($query->have_posts()) {
-		    $query->the_post();
+        while ($query->have_posts()) {
+            $query->the_post();
 
-		    $result = array(
-			    'title' => wp_kses_post(get_the_title()),
-			    'type' => esc_html(get_post_type()),
-			    'id' => get_the_ID(),
-		    );
+            $result = array(
+                'title' => wp_kses_post(get_the_title()),
+                'type' => esc_html(get_post_type()),
+                'id' => get_the_ID(),
+            );
 
-		    $results[] = $result;
-	    }
+            $results[] = $result;
+        }
 
-	    wp_reset_postdata();
+        wp_reset_postdata();
         $tax_query = new WP_Term_Query(array(
-	        'taxonomy' => 'product_cat',
-	        'field' => 'name',
-	        'name__like' => $search_query,
+            'taxonomy' => 'product_cat',
+            'field' => 'name',
+            'name__like' => $search_query,
         ));
 
         foreach ($tax_query->get_terms() as $term) {
@@ -691,23 +698,23 @@ class Velo_Product_Selector_Free_Admin
     // Function to save the edited product selector
     function velo_ajax_save_edited_product_selector()
     {
-	    // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        // Check if the nonce is valid, if not, return error
+        if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
         // Check if all required fields are set
         if (!isset($_REQUEST['json_data']) || !isset($_REQUEST['product_selector_id'])) {
             wp_send_json_error('Not all required fields are set.', 400);
         }
 
-	    $product_selector_id = filter_input(INPUT_POST, 'product_selector_id', FILTER_SANITIZE_NUMBER_INT);
-	    if (empty($product_selector_id)) wp_send_json_error('This item does not exist.', 400);
+        $product_selector_id = filter_input(INPUT_POST, 'product_selector_id', FILTER_SANITIZE_NUMBER_INT);
+        if (empty($product_selector_id)) wp_send_json_error('This item does not exist.', 400);
 
-	    // Get information about the post
-	    $post = get_post($product_selector_id);
-	    $post_type = get_post_type($product_selector_id);
-	    $post_id = $post->ID ?? $product_selector_id;
+        // Get information about the post
+        $post = get_post($product_selector_id);
+        $post_type = get_post_type($product_selector_id);
+        $post_id = $post->ID ?? $product_selector_id;
 
         if ($post_type !== 'velo_selectors' && !empty($post)) {
             // Wrong post type
@@ -723,6 +730,15 @@ class Velo_Product_Selector_Free_Admin
         // Check if the JSON encoding/decoding process was successful
         if (json_last_error() !== JSON_ERROR_NONE) {
             wp_send_json_error('Invalid JSON data.', 400);
+        }
+
+        // Count the items
+        $item_count = substr_count($encoded_data, '"text":');
+
+        // Check if the string contains more then 20 chars
+        if ($item_count > 20) {
+            // To many items
+            wp_send_json_error('Too many items. The maximum number allowed is 20. For information on adding more items, please visit our website.', 400);
         }
 
         // Ensure $post_id is a positive integer
@@ -742,28 +758,28 @@ class Velo_Product_Selector_Free_Admin
     // Function to delete the product selector
     function velo_ajax_delete_product_selector()
     {
-	    // Check if the nonce is valid, if not, return error
-	    if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
-		    wp_send_json_error('Invalid nonce.', 400);
-	    }
+        // Check if the nonce is valid, if not, return error
+        if (!isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'velo_settings_nonce')) {
+            wp_send_json_error('Invalid nonce.', 400);
+        }
 
         // Check if all required fields are set
         if (!isset($_REQUEST['product_selector_id'])) {
             wp_send_json_error('Not all required fields are set.', 400);
         }
 
-	    $product_selector_id = filter_input(INPUT_POST, 'product_selector_id', FILTER_SANITIZE_NUMBER_INT);
-	    if (empty($product_selector_id)) wp_send_json_error('This item does not exist.', 400);
+        $product_selector_id = filter_input(INPUT_POST, 'product_selector_id', FILTER_SANITIZE_NUMBER_INT);
+        if (empty($product_selector_id)) wp_send_json_error('This item does not exist.', 400);
 
-	    // Get information about the post
-	    $post = get_post($product_selector_id);
-	    $post_type = get_post_type($product_selector_id);
-	    $post_id = $post->ID ?? $product_selector_id;
+        // Get information about the post
+        $post = get_post($product_selector_id);
+        $post_type = get_post_type($product_selector_id);
+        $post_id = $post->ID ?? $product_selector_id;
 
-	    if ($post_type !== 'velo_selectors' && !empty($post)) {
-		    // Wrong post type
-		    wp_send_json_error('This item does not exist.', 400);
-	    }
+        if ($post_type !== 'velo_selectors' && !empty($post)) {
+            // Wrong post type
+            wp_send_json_error('This item does not exist.', 400);
+        }
 
         // Force delete post
         wp_delete_post((int)$post_id, true);

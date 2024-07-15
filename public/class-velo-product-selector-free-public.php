@@ -195,7 +195,7 @@ class Velo_Product_Selector_Free_Public
         }
 
         // Validate the 'item_value' value
-        $item_value = filter_input(INPUT_POST, 'item_value', FILTER_SANITIZE_STRING);
+        $item_value = filter_input(INPUT_POST, 'item_value', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         if (empty($item_value) || !preg_match('/^[0-9]+_([a-zA-Z0-9_]+)(,[0-9]+_([a-zA-Z0-9_]+))*$/', $item_value)) {
             wp_send_json_error('Invalid item_value format.', 400);
         }
