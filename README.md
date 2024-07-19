@@ -7,8 +7,8 @@ Expand the capabilities of your WordPress site with Velocity Plugins. Our unique
 - **Link:** [VelocityPlugins.com](https://VelocityPlugins.com)
 - **Tags:** VelocityPlugins, WooCommerce, Products
 - **Requires at least:** 6.0.0
-- **Tested up to:** 6.5.4
-- **Stable tag:** 1.0.5
+- **Tested up to:** 6.6.0
+- **Stable tag:** 1.0.6
 - **License:** [GPL-2.0+](http://www.gnu.org/licenses/gpl-2.0.txt)
 
 ## Third-Party Services

@@ -2,37 +2,18 @@
 
 /**
  * Fired during plugin activation
- *
- * @link       https://velocityplugins.com
- * @since      1.0.0
- *
- * @package    Velo_Product_Selector_Free
- * @subpackage Velo_Product_Selector_Free/includes
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
 /**
  * Fired during plugin activation.
  *
  * This class defines all code necessary to run during the plugin's activation.
- *
- * @since      1.0.0
- * @package    Velo_Product_Selector_Free
- * @subpackage Velo_Product_Selector_Free/includes
- * @author     VelocityPlugins <info@velocityplugins.com>
  */
 class Velo_Product_Selector_Free_Activator
 {
-
-    /**
-     * Short Description. (use period)
-     *
-     * Long Description.
-     *
-     * @since    1.0.0
-     */
     public static function activate()
     {
         // Check if the other plugin is active

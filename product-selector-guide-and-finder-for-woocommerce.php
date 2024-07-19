@@ -3,15 +3,11 @@
 /**
  * VelocityPlugins
  *
- * @link              https://velocityplugins.com
- * @since             1.0.0
- * @package           Velo_Product_Selector_Free
- *
  * @wordpress-plugin
  * Plugin Name:       Product selector guide and finder for WooCommerce
  * Plugin URI:        https://velocityplugins.com
  * Description:       Expand the capabilities of your WordPress site with Velocity Plugins. With this unique product selector tool you can help your users even better to get to the right product! This can lead to more sales and a better user experience.
- * Version:           1.0.5
+ * Version:           1.0.6
  * Author:            VelocityPlugins
  * Author URI:        https://profiles.wordpress.org/velocityplugins/
  * License:           GPL-2.0+
@@ -26,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Currently plugin version
  */
-define( 'VELO_PRODUCT_SELECTOR_FREE_VERSION', '1.0.5' );
+define( 'VELO_PRODUCT_SELECTOR_FREE_VERSION', '1.0.6' );
 
 /**
  * Plugin root file
@@ -71,8 +67,6 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-velo-product-selector-free
  * Since everything within the plugin is registered via hooks,
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
- *
- * @since    1.0.0
  */
 function velo_run_velo_product_selector_free() {
 
